@@ -18,7 +18,7 @@ class DetailManga extends Manga{
             return $this->getId(). " / ". $this->getNumero_du_tome() . " / ". $this->getResume_du_tome()."</br>";
         }
 
-
+ 
         /**
          * Get the value of ean
          */ 

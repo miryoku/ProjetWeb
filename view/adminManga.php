@@ -11,6 +11,7 @@
             <td><?= $list->getId()?></td>
             <td><?= $list->getTitre()?></td>
             <td><?= $list->getCategorie()?></td>
+            <td><a href="<?=REQ_TYPE?>/<?= $list->getTitreUrl()?>">selection</a></td>
             <td><a href="<?=REQ_TYPE?>/updateManga/<?=$list->getTitreUrl()?>">Modifier</a></td>
         </tr>
     <?php endforeach ?>

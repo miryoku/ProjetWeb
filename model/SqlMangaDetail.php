@@ -8,9 +8,9 @@ class SqlMangaDetail extends Sql{
     }
 
     public function all($id){
-    $sql="SELECT id,numero_du_tome,price,quantite_stock,id_item 
-        FROM item_detail 
-        WHERE id_item = ".$id;
+    $sql="SELECT id,numero_du_tome,date_de_sortie,price,quantite_stock,id_manga 
+        FROM manga_tome 
+        WHERE id_manga = ".$id;
     $query=$this->pdo->query($sql);
     $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
     $result= $query->fetchAll();
@@ -18,9 +18,9 @@ class SqlMangaDetail extends Sql{
     }
 
     public function selectTome($tome,$num){
-        $sql="SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_item,ean 
-            FROM item_detail 
-            WHERE id_item = :id_item and numero_du_tome = :numero_du_tome";
+        $sql="SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean 
+            FROM manga_tome 
+            WHERE id_manga = :id_item and numero_du_tome = :numero_du_tome";
         $query=$this->pdo->prepare($sql);
         $query->execute(array('id_item'=>$tome,'numero_du_tome'=>$num));
         $query->setFetchMode(PDO::FETCH_CLASS,$this->class);

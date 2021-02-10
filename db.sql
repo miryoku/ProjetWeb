@@ -1,3 +1,4 @@
+
 DROP DATABASE projetWeb;
 
 CREATE DATABASE  IF NOT EXISTS  projetWeb;
@@ -93,7 +94,7 @@ CREATE TABLE IF NOT EXISTS etat(
 )ENGINE=INNODB;
 
 
-CREATE TABLE IF NOT EXISTS item(
+CREATE TABLE IF NOT EXISTS manga(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     titre VARCHAR(255),
     dessinateur VARCHAR(255),
@@ -108,18 +109,18 @@ CREATE TABLE IF NOT EXISTS item(
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS genre_transition(
-   id_item INTEGER,
+   id_manga INTEGER,
    id_genre INTEGER,
-   PRIMARY KEY(id_item,id_genre),
+   PRIMARY KEY(id_manga,id_genre),
    FOREIGN KEY (id_genre)
 	REFERENCES genre(id) ON UPDATE CASCADE ON DELETE NO ACTION,
-FOREIGN KEY(id_item)
-	REFERENCES item(id) ON UPDATE CASCADE ON DELETE NO ACTION
+FOREIGN KEY(id_manga)
+	REFERENCES manga(id) ON UPDATE CASCADE ON DELETE NO ACTION
 	
 )ENGINE=INNODB;
 
 
-CREATE TABLE IF NOT EXISTS item_detail(
+CREATE TABLE IF NOT EXISTS manga_tome(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     numero_du_tome INTEGER,
     resume_du_tome TEXT,
@@ -127,12 +128,12 @@ CREATE TABLE IF NOT EXISTS item_detail(
     price FLOAT,
     id_image INTEGER,
     quantite_stock INTEGER,
-    id_item INTEGER,
+    id_manga INTEGER,
     ean VARCHAR(20),
    FOREIGN KEY (id_image)
 	REFERENCES  image(id) ON UPDATE CASCADE ON DELETE  NO ACTION,
-    FOREIGN KEY (id_item)
-	REFERENCES item(id) ON UPDATE CASCADE ON DELETE NO ACTION
+    FOREIGN KEY (id_manga)
+	REFERENCES manga(id) ON UPDATE CASCADE ON DELETE NO ACTION
 )ENGINE=INNODB;
 
 
@@ -151,11 +152,11 @@ CREATE TABLE IF NOT EXISTS commande(
 CREATE TABLE IF NOT EXISTS elementDeLaCommande(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     id_commande INTEGER,
-    id_item INTEGER,
+    id_manga INTEGER,
     date_de_la_commande DATE,
     prix FLOAT,
-    FOREIGN KEY (id_item)
-	REFERENCES  item_detail(id) ON UPDATE CASCADE ON DELETE  NO ACTION,
+    FOREIGN KEY (id_manga)
+	REFERENCES  manga_tome(id) ON UPDATE CASCADE ON DELETE  NO ACTION,
     FOREIGN KEY (id_commande)
 	REFERENCES  commande(id) ON UPDATE CASCADE ON DELETE  NO ACTION
 )ENGINE=INNODB;
@@ -163,22 +164,22 @@ CREATE TABLE IF NOT EXISTS elementDeLaCommande(
 CREATE TABLE IF NOT EXISTS sell(
 	id INTEGER PRIMARY KEY AUTO_INCREMENT,
 	date_sell DATE,
-	id_item_detail INTEGER,
+	id_manga_detail INTEGER,
 	id_userdb INTEGER,
 	FOREIGN KEY(id_userdb)
 		REFERENCES userdb(id),
-	FOREIGN KEY (id_item_detail)
-		REFERENCES item_detail(id) ON UPDATE CASCADE ON DELETE NO ACTION
+	FOREIGN KEY (id_manga_detail)
+		REFERENCES manga_tome(id) ON UPDATE CASCADE ON DELETE NO ACTION
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS avis_transition(
-	id_item_detail INTEGER,
+	id_manga_tome INTEGER,
 	id_avis INTEGER,
-	PRIMARY KEY(id_item_detail,id_avis),
+	PRIMARY KEY(id_manga_tome,id_avis),
 	FOREIGN KEY (id_avis)
 		REFERENCES avis(id) ON UPDATE CASCADE ON DELETE NO ACTION,
-	FOREIGN KEY(id_item_detail)
-		REFERENCES item_detail(id) ON UPDATE CASCADE ON DELETE NO ACTION
+	FOREIGN KEY(id_manga_tome)
+		REFERENCES manga_tome(id) ON UPDATE CASCADE ON DELETE NO ACTION
 );
 
 
@@ -244,16 +245,16 @@ INSERT INTO etat(nom) VALUES ('fini'),('en cours'),('stoppe');
 
 
 
-INSERT INTO item(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat)VALUES("Atelier des sorciers","SHIRAHAMA Kamome","SHIRAHAMA Kamome",1,"kodansha",2),
+INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat)VALUES("Atelier des sorciers","SHIRAHAMA Kamome","SHIRAHAMA Kamome",1,"kodansha",2),
 ('Levius','NAKATA Haruhisa','NAKATA Haruhisa',1,'ikki',1),
 ("Errance","ASANO Inio","ASANO Inio",1,"Big Comic Superior",1);
 
 
 #select * from genre;
-INSERT INTO genre_transition(id_item,id_genre)VALUES(1,12),(1,4),(2,1),(2,28),(3,8),(3,34);
+INSERT INTO genre_transition(id_manga,id_genre)VALUES(1,12),(1,4),(2,1),(2,28),(3,8),(3,34);
 
 
-INSERT INTO item_detail(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,ean,id_item)VALUES
+INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,ean,id_manga)VALUES
 (1,"Coco a toujours été fascinée par la magie. Hélas, seuls les sorciers peuvent pratiquer cet art et les élus sont choisis dès la naissance. Un jour, Kieffrey, un sorcier, arrive dans le village de la jeune fille. En l’espionnant,Coco comprend alors la véritable nature de la magie et se rappelle d’un livre de magie et d’un encrier qu’elle a acheté à un mystérieux inconnu quand elle était enfant. Elle s’exerce alors en cachette. Mais, dans son ignorance,Coco commet un acte tragique !Dès lors, elle devient la disciple de Kieffrey et va découvrir un monde dont elle ne soupçonnait pas l’existence !"
 ,"2018-03-07",7.50,1000,"9782811638771",1),
 (2,"On naît sorcier, on ne le devient pas. C'est la règle. Pourtant, Kieffrey a pris Coco sous son aile et a fait d'elle sa disciple : d'humaine normale, la voilà devenue apprentie sorcière !Kieffrey, Coco et ses trois camarades se sont rendus à Carn, petite ville de sorciers, pour acheter des fournitures magiques. Mais soudain, les quatre fillettes tombent dans un piège tendu par un mystérieux sorcier encapuchonné : elles sont coincées dans une dimension parallèle et doivent échapper à un dragon !",
@@ -271,18 +272,18 @@ INSERT INTO item_detail(numero_du_tome,resume_du_tome,date_de_sortie,price,quant
 /* probleme avec wamp mais pas avec xamp pour le resume_du_tome*/
 
 
-INSERT INTO sell(date_sell,id_item_detail,id_userdb) VALUES
+INSERT INTO sell(date_sell,id_manga_detail,id_userdb) VALUES
 (NOW(),1,1),(NOW(),2,1),(NOW(),2,2),(NOW(),1,2),(NOW(),1,2),(NOW(),3,1),(NOW(),3,2),(NOW(),1,1),(NOW(),1,1),(NOW(),1,2);
 
 INSERT INTO avis(titre,commentaire,note,date_avis,id_userdb)VALUES("test","wesh ma geule",15,NOW(),1),
 ("test2","prout cacauhete",16,NOW(),2),
 ("test3","prout cacauhete",8,NOW(),1);
-INSERT INTO avis_transition(id_item_detail,id_avis)VALUES(1,1),(2,1),(3,3);
+INSERT INTO avis_transition(id_manga_tome,id_avis)VALUES(1,1),(2,1),(3,3);
 
 INSERT INTO statuscommande(nom)VALUES("en cours"),("termine"),("annule");
 
 INSERT INTO commande(id_user,id_status,price)VALUES(1,2,17),(2,3,7.7);
-INSERT INTO elementdelacommande(id_commande,id_item,date_de_la_commande,prix)VALUES(1,1,NOW(),7.50),(1,2,NOW(),7.50),(1,1,NOW(),7.50),(1,3,NOW(),7.50),(2,1,NOW(),7.50);
+INSERT INTO elementdelacommande(id_commande,id_manga,date_de_la_commande,prix)VALUES(1,1,NOW(),7.50),(1,2,NOW(),7.50),(1,1,NOW(),7.50),(1,3,NOW(),7.50),(2,1,NOW(),7.50);
 
 
 
@@ -315,6 +316,23 @@ SELECT nom,prenom,email,date_inscription,name_role FROM userDB AS u, role_user A
 
 SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_item,ean 
             FROM item_detail 
-            WHERE id_item = 3 AND numero_du_tome = 1;*/
-            
-           
+         WHERE id_item = 3 AND numero_du_tome = 1;*/
+    /*        
+UPDATE manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat)
+        VALUES(:titre,:dessinateur,:scenariste,:categorie,:editeur,:id_etat)
+        
+UPDATE manga
+SET titre = :titre, dessinateur = :dessinateur, scenariste = :scenariste,id_categorie=:id_categorie,editeur_oeuvre_origine=:editeur_oeuvre_origine,id_etat=:id_etat
+WHERE id=:id;
+
+UPDATE manga
+SET titre = "prout", dessinateur = "orout", scenariste = "rour",id_categorie=2,editeur_oeuvre_origine="wesh",id_etat=1
+WHERE id=2;
+
+
+select * from genre_transition;
+
+
+delete from genre_transition where id_manga=1
+
+            */

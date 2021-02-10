@@ -27,7 +27,7 @@ class SqlnotObject extends Sql{
     public function RecupGenre($id){
         $sql="SELECT g.nom
             FROM genre_transition AS gt, genre AS g
-            WHERE gt.id_genre=g.id AND gt.id_item=:id";
+            WHERE gt.id_genre=g.id AND gt.id_manga=:id";
         $query=$this->pdo->prepare($sql);
         $query->execute(array('id'=>$id));
         $result=$query->fetchall();

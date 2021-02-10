@@ -3,15 +3,15 @@ require('config/main.php');
 
 
 /* a mettre a auto load*/
-require_once("class/Manga.php");
-require_once("class/DetailManga.php");
-require_once("class/User.php");
-require_once("class/Connection.php");
-require_once('class/Sql.php');
-require_once('class/SqlManga.php');
-require_once('class/SqlMangaDetail.php');
-require_once('class/SqlLogin.php');
-require_once('class/SqlnotObject.php');
+require_once("model/Manga.php");
+require_once("model/DetailManga.php");
+require_once("model/User.php");
+require_once("model/Connection.php");
+require_once('model/Sql.php');
+require_once('model/SqlManga.php');
+require_once('model/SqlMangaDetail.php');
+require_once('model/SqlLogin.php');
+require_once('model/SqlnotObject.php');
 
 
 define('ROOT_PATH', "/projetWeb/"); // Chemin qui suit le nom de domaine. Exemple: http://monprojet.local/08_router/ le path a indiqué sera donc '/08_router/'

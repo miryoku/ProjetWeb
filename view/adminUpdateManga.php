@@ -1,4 +1,5 @@
 <form method="post">
+    <input type="hidden" name="id" value="<?= $manga->getId() ?>">
     Titre : <input type="text" name="titre" id="" value="<?= $manga->getTitre() ?> ">
     Desinateur : <input type="text" name="desinateur" id="" value="<?= $manga->getDessinateur() ?>">
     Scenariste : <input type="text" name="scenariste" id="" value="<?= $manga->getScenariste() ?>">

@@ -39,6 +39,7 @@
             <li><a class="dropdown-item" href="<?=ROOT_PATH?>inscription">S'inscire</a></li>
           <?php else: ?>
             <li class="dropdown-item"> Bonjour <?= $_SESSION['user']->getNom() ?></li>
+            <li ><a class="dropdown-item" href="<?=ROOT_PATH?>commande">Commande</a></li>
             <li><a class="dropdown-item" href="<?=ROOT_PATH?>logout">Deconnexion</a></li>
           <?php endif?>
 

@@ -37,7 +37,16 @@ class SqlManga extends Sql{
         return $result;
     } 
 
-    
+    public function selectTitreID($id){
+        $sql="SELECT i.id,i.titre,i.dessinateur,i.scenariste,i.editeur_oeuvre_origine,c.categorie
+            FROM manga AS i,categorie AS c
+            WHERE i.id_categorie=c.id and i.id = :id";
+        $query=$this->pdo->prepare($sql);
+        $query->execute(['id'=>$id]);
+        $query->setFetchMode(PDO::FETCH_CLASS,$this->class);
+        $result=$query->fetch();
+        return $result;
+    } 
 
     public function sqlInsertManga($titre,$dessinateur,$scenariste,$editeur,$categorie){
         $sql="INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat)

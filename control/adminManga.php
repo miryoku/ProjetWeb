@@ -1,14 +1,28 @@
 <?php
-
-if(REQ_TYPE_ID=="updateManga"&&!empty($_POST['titre'])&&!empty($_POST['desinateur'])&&!empty($_POST['scenariste'])&&!empty($_POST['editeur'])&&!empty($_POST['categorie'])&& !empty($_POST['states'])){
+/*if(REQ_ACTION2=="delete"){
+    $sqlMangaDetail=new SqlMangaDetail();
+    $sqlMangaDetail->sqlDeleteMangaDetail(REQ_ACTION);
+    header('Location: '.ROOT_PATH.'adminManga/'.REQ_TYPE_ID);
+}else*/ if(REQ_ACTION2=="update"&& !empty($_POST['nTome'])&& !empty($_POST['resume'])&& !empty($_POST['date'])&& !empty($_POST['price'])&& !empty($_POST['quantite'])&& !empty($_POST['ean'])){
+    $sqlMangaDetail=new SqlMangaDetail();
+    $sqlMangaDetail->sqlUpdateMangaDetail($_POST['id'],  $_POST['nTome'],$_POST['resume'],$_POST['date'],$_POST['price'],$_POST['quantite'],$_POST['ean']);
+    header('Location: '.ROOT_PATH.'adminManga/'.REQ_TYPE_ID);
+}else if(REQ_ACTION2=="update"){
+    $sqlManga=new SqlManga();
+    $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
+    $sqlMangaDetail=new SqlMangaDetail();
+    $detail=$sqlMangaDetail->selectTome($manga->getId(),REQ_ACTION);
+    include("view/adminupdateMAngaDetail.php");
+}
+else if(REQ_TYPE_ID=="updateManga"&&!empty($_POST['titre'])&&!empty($_POST['desinateur'])&&!empty($_POST['scenariste'])&&!empty($_POST['editeur'])&&!empty($_POST['categorie'])&& !empty($_POST['states'])){
  $sqlManga=new SqlManga();
     $sqlManga-> sqlUpdateManga($_POST["id"],$_POST['titre'],$_POST['desinateur'],$_POST['scenariste'],$_POST['editeur'],$_POST['categorie']);
     $sqlManga->sqlDeleteGenre($_POST["id"]);
     $sqlManga->sqlInsertGenre($_POST["id"],$_POST["states"]);
-    header('Location: '.ROOT_PATH.'/projetWeb/adminManga');
+    header('Location: '.ROOT_PATH.'adminManga');
     
 }
-elseif(REQ_TYPE_ID=="updateManga"){
+else if(REQ_TYPE_ID=="updateManga"){
    
     $sqlManga=new SqlManga();
     $manga=$sqlManga->selectTitre(REQ_ACTION);
@@ -24,19 +38,40 @@ else if(REQ_TYPE_ID=="insertManga" &&!empty($_POST['titre'])&&!empty($_POST['des
     $sqlManga->sqlInsertManga($_POST['titre'],$_POST['desinateur'],$_POST['scenariste'],$_POST['editeur'],$_POST['categorie']);
     $recup=$sqlManga->selectTitre($_POST['titre']);
     $sqlManga->sqlInsertGenre($recup->getId(),$_POST['states']);
-    header('Location: '.ROOT_PATH.'/projetWeb/adminManga');
+    header('Location: '.ROOT_PATH.'adminManga');
     
 }
 else if(REQ_TYPE_ID=="insertManga"){
-   
+
     $SqlnotObject=new SqlNotObject();
     $categories=$SqlnotObject->afficheCategoryAll();
     $genres=$SqlnotObject->afficheGenreAll();
     include("view/adminAddManga.php");
 
 }
+else if(REQ_ACTION=="insert" && !empty($_POST['nTome'])&& !empty($_POST['resume'])&& !empty($_POST['date'])&& !empty($_POST['price'])&& !empty($_POST['quantite'])&& !empty($_POST['ean'])){
+    
+    $sqlMangaDetail=new SqlMangaDetail();
+    $sqlMangaDetail->sqlInsertMangaDetail($_POST['id'],  $_POST['nTome'],$_POST['resume'],$_POST['date'],$_POST['price'],$_POST['quantite'],$_POST['ean']);
+    header('Location: '.ROOT_PATH.'adminManga/'.REQ_TYPE_ID);
+}
+
+else if(REQ_ACTION=="insert"){
+   
+    $sqlManga=new SqlManga();
+    $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
+    include('view/adminMangaDetailAjout.php');
+}
+
 else if(REQ_ACTION){
-    echo "coucou";
+
+    $sqlManga=new SqlManga();
+    $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
+    $sqlMangaDetail=new SqlMangaDetail();
+    $detail=$sqlMangaDetail->selectTome($manga->getId(),REQ_ACTION);
+    include('view/mangaDetailNumber.php');
+
+
 }else if (REQ_TYPE_ID){
 
     $sqlManga=new SqlManga();

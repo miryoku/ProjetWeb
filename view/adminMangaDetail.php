@@ -13,8 +13,8 @@
             <td><?= $detail->getPrice()?></td>
             <td><?= $detail->getQuantite_stock()?></td>
             <td><a href="<?= REQ_TYPE_ID?>/<?= $detail->getNumero_du_tome() ?>"> affiche</a></td>
-            <td><a href="<?= REQ_TYPE_ID?>/<?= $detail->getNumero_du_tome() ?>/modifier"> modifier</a></td>
-            <td><a href="<?= REQ_TYPE_ID?>/<?= $detail->getNumero_du_tome() ?>/suprime"> supprime</a></td>
+            <td><a href="<?= REQ_TYPE_ID?>/<?= $detail->getNumero_du_tome() ?>/update"> modifier</a></td>
+            <!--<td><a href="<?= REQ_TYPE_ID?>/<?= $detail->getId() ?>/delete"> supprime</a></td>-->
         </tr>
     <?php endforeach ?>
 </table>

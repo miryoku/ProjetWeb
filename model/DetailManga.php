@@ -10,10 +10,10 @@ class DetailManga extends Manga{
         private $date_de_sortie;
         private $price;
         private $quantite_stock;
-        private $id_item;
+        private $id_manga;
         private $ean;
 
-    
+        
         public function __toString(){
             return $this->getId(). " / ". $this->getNumero_du_tome() . " / ". $this->getResume_du_tome()."</br>";
         }
@@ -39,25 +39,6 @@ class DetailManga extends Manga{
                 return $this;
         }
 
-        /**
-         * Get the value of id_item
-         */ 
-        public function getId_item()
-        {
-                return $this->id_item;
-        }
-
-        /**
-         * Set the value of id_item
-         *
-         * @return  self
-         */ 
-        public function setId_item($id_item)
-        {
-                $this->id_item = $id_item;
-
-                return $this;
-        }
 
         /**
          * Get the value of quantite_stock
@@ -175,6 +156,26 @@ class DetailManga extends Manga{
         public function setId($id)
         {
                 $this->id = $id;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of id_manga
+         */ 
+        public function getId_manga()
+        {
+                return $this->id_manga;
+        }
+
+        /**
+         * Set the value of id_manga
+         *
+         * @return  self
+         */ 
+        public function setId_manga($id_manga)
+        {
+                $this->id_manga = $id_manga;
 
                 return $this;
         }

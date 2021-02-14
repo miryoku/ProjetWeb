@@ -25,6 +25,7 @@ create table if not exists cordonneBancaire(
 */
 
 
+
 CREATE TABLE IF NOT EXISTS userDB(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
@@ -120,6 +121,7 @@ FOREIGN KEY(id_manga)
 )ENGINE=INNODB;
 
 
+
 CREATE TABLE IF NOT EXISTS manga_tome(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     numero_du_tome INTEGER,
@@ -143,6 +145,7 @@ CREATE TABLE IF NOT EXISTS commande(
     id_user INTEGER,
     id_status INTEGER,
     price FLOAT,
+    date_de_la_commande DATE,
     FOREIGN KEY (id_user)
 	REFERENCES  userDB(id) ON UPDATE CASCADE ON DELETE  NO ACTION,
     FOREIGN KEY (id_status)
@@ -153,7 +156,6 @@ CREATE TABLE IF NOT EXISTS elementDeLaCommande(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     id_commande INTEGER,
     id_manga INTEGER,
-    date_de_la_commande DATE,
     prix FLOAT,
     FOREIGN KEY (id_manga)
 	REFERENCES  manga_tome(id) ON UPDATE CASCADE ON DELETE  NO ACTION,
@@ -282,57 +284,27 @@ INSERT INTO avis_transition(id_manga_tome,id_avis)VALUES(1,1),(2,1),(3,3);
 
 INSERT INTO statuscommande(nom)VALUES("en cours"),("termine"),("annule");
 
-INSERT INTO commande(id_user,id_status,price)VALUES(1,2,17),(2,3,7.7);
-INSERT INTO elementdelacommande(id_commande,id_manga,date_de_la_commande,prix)VALUES(1,1,NOW(),7.50),(1,2,NOW(),7.50),(1,1,NOW(),7.50),(1,3,NOW(),7.50),(2,1,NOW(),7.50);
-
-
+INSERT INTO commande(id_user,id_status,price,date_de_la_commande)VALUES(1,1,30,NOW()),(2,2,7.5,NOW()),(2,3,30,NOW());
+INSERT INTO elementdelacommande(id_commande,id_manga,prix)VALUES(1,1,7.50),(1,2,7.50),(1,1,7.50),(1,3,7.50),(2,1,7.50),(3,1,7.50),(3,2,7.50),(3,1,7.50),(3,3,7.50);
 
 
 
 /*
-SELECT * FROM item_detail;
-SELECT i.id,i.titre,i.dessinateur,i.scenariste,i.editeur_oeuvre_origine,c.categorie FROM item AS i,categorie AS c WHERE i.id_categorie=c.id;
 
-select id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_item,ean from item_detail where id_item=1;
+SELECT *
+FROM commande AS c, userDB AS u, statuscommande AS s, elementdelacommande AS e
+WHERE c.id=e.id_commande AND c.id_status=s.id AND c.id_user=u.id;
 
-SELECT i.id,i.titre,i.dessinateur,i.scenariste,i.editeur_oeuvre_origine,c.categorie FROM item AS i,categorie AS c WHERE i.id_categorie=c.id and  i.titre like "Atelier des sorciers";
 
+select u.id as id_user,c.id as id_commande,s.nom as status,c.price,c.date_de_la_commande as date
+from commande as c, userdb as u, statuscommande AS s
+where c.id_user=u.id AND c.id_status=s.id  and  u.email like 'maurice@maurice.bf';
+
+select * from manga_tome;
+
+
+
+SELECT *
+            FROM manga AS i
+            WHERE   i.id = 1
 */
-
-
-/*
-SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_item,ean FROM item_detail WHERE id_item=1;
-
-
-SELECT i.id,i.titre,i.dessinateur,i.scenariste,i.editeur_oeuvre_origine,c.categorie
-    FROM item AS i,categorie AS c
-    WHERE i.id_categorie=c.id AND i.titre LIKE "Atelier des sorciers";
-
-
-SELECT * FROM userDB;
-DELETE FROM userDB WHERE id=3;
-
-SELECT nom,prenom,email,date_inscription,name_role FROM userDB AS u, role_user AS r WHERE u.id_role_user=r.id AND email LIKE 'ata_@hotmail.fr' AND mdp LIKE 'test';
-
-SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_item,ean 
-            FROM item_detail 
-         WHERE id_item = 3 AND numero_du_tome = 1;*/
-    /*        
-UPDATE manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat)
-        VALUES(:titre,:dessinateur,:scenariste,:categorie,:editeur,:id_etat)
-        
-UPDATE manga
-SET titre = :titre, dessinateur = :dessinateur, scenariste = :scenariste,id_categorie=:id_categorie,editeur_oeuvre_origine=:editeur_oeuvre_origine,id_etat=:id_etat
-WHERE id=:id;
-
-UPDATE manga
-SET titre = "prout", dessinateur = "orout", scenariste = "rour",id_categorie=2,editeur_oeuvre_origine="wesh",id_etat=1
-WHERE id=2;
-
-
-select * from genre_transition;
-
-
-delete from genre_transition where id_manga=1
-
-            */

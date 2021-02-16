@@ -12,6 +12,17 @@ class Manga
 
 
 
+    public function insertAllData($id,$titre,$dessinateur,$scenariste,$editeur_oeuvre_origine,$categorie,$genre){
+        setId($id);
+        setTitre($titre);
+        setDessinateur($dessinateur);
+        setScenariste($scenariste);
+        setEditeur_oeuvre_origine($editeur_oeuvre_origine);
+        setCategorie($categorie);
+        setGenre($genre);
+    }
+
+
     public function __toString(){
         return $this->getId(). " / ". $this->getTitre() . " / ". $this->getCategorie()."</br>";
     }

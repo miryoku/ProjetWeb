@@ -249,8 +249,8 @@ INSERT INTO etat(nom) VALUES ('fini'),('en cours'),('stoppe');
 
 INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat)VALUES("Atelier des sorciers","SHIRAHAMA Kamome","SHIRAHAMA Kamome",1,"kodansha",2),
 ('Levius','NAKATA Haruhisa','NAKATA Haruhisa',1,'ikki',1),
-("Errance","ASANO Inio","ASANO Inio",1,"Big Comic Superior",1);
-
+("Errance","ASANO Inio","ASANO Inio",1,"Big Comic Superior",1)
+("Death Note","OBATA Takeshi","OHBA Tsugumi",3,"Shûeisha",1);
 
 #select * from genre;
 INSERT INTO genre_transition(id_manga,id_genre)VALUES(1,12),(1,4),(2,1),(2,28),(3,8),(3,34);

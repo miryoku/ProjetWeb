@@ -1,9 +1,36 @@
 <?php
 
 
+if(REQ_ACTION && !empty($_POST['send'])){
 
+  
+    $sqlManga=new SqlManga();
+    $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
+    $sqlMangaDetail=new SqlMangaDetail();
+    $detail=$sqlMangaDetail->selectTome($manga->getId(),REQ_ACTION);
 
-if(REQ_ACTION){
+    if(empty($_SESSION['panier'])){
+        $_SESSION['panier']=[];
+    }
+
+    
+    $bool=false;
+    foreach($_SESSION['panier'] as $paniers){
+       
+        if($paniers[0]->getTitre()==$manga->getTitre() && $paniers[1]->getNumero_du_tome()==$detail->getNumero_du_tome()){
+            $_SESSION['panier'][0][2]=$paniers[2]+$_POST['quantite'];
+            $bool=true;
+        }
+        
+    }
+
+    if(!$bool){
+    $array=[];
+    array_push($array,$manga,$detail,$_POST['quantite']);
+    array_push($_SESSION['panier'],$array);}
+    header('Location: '.ROOT_PATH.'panier');
+
+}else if(REQ_ACTION){
 
     $sqlManga=new SqlManga();
     $manga=$sqlManga->selectTitre(REQ_TYPE_ID);

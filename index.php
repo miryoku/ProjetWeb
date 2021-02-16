@@ -17,6 +17,7 @@ require_once('model/SqlCommande.php');
 require_once('model/CommandeDetail.php');
 require_once('model/SqlCommandeDetail.php');
 
+
 define('ROOT_PATH', "/projetWeb/"); // Chemin qui suit le nom de domaine. Exemple: http://monprojet.local/08_router/ le path a indiqué sera donc '/08_router/'
 $request = str_replace(ROOT_PATH, "", $_SERVER['REQUEST_URI']); // On récupère juste la request, sans le chemin du dossier.
 $request = trim($request, '/'); // Permer de supprimer le slash devant la request si elle existe
@@ -33,7 +34,6 @@ $file = 'control/'.REQ_TYPE.'.php';
 
 session_start();
 require_once('view/header.php');
-
 
 
 if(file_exists($file)){ // On vérifie que le fichier php existe

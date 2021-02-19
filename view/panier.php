@@ -1,5 +1,6 @@
 
 <h1>Panier</h1>
+<?php if(isset($_SESSION['panier'])): ?>
 <?php $i=0; foreach($_SESSION['panier'] as $paniers): ?>
 
     <h2><?= $paniers[0]->getTitre() ?></h2>
@@ -18,6 +19,16 @@
    <input type="submit" value="supprime">
    </form>
    
-<?php $i++; endforeach ?>
+<?php $totArticle=$totArticle+$paniers[2]; $tot=$tot+$paniers[1]->getPrice()*$paniers[2]; $i++; endforeach //$i sert a empeche un bug , quand on on envoie la value 0 ca ne functione aps donc faut envoie 0.00?>
 
-Panier <?= count($_SESSION['panier']) ?>
+Panier <?= $totArticle ?>
+
+<form method="post">
+        <input type="hidden" name="sell" value="<?=$tot?>">
+        <input type="submit" value="envoie">
+</form>
+<?php else: ?>
+
+<p>Panier vide</p>
+
+<?php endif ?>

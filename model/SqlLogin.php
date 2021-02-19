@@ -7,7 +7,7 @@ class SqlLogin extends Sql{
     }
 
     public function sqlUserConnection($login,$mdp){
-        $sql="SELECT nom,prenom,email,date_inscription,name_role 
+        $sql="SELECT i.id,nom,prenom,email,date_inscription,name_role 
             FROM userDB AS u, role_user AS r 
             WHERE u.id_role_user=r.id AND email LIKE :email AND mdp LIKE :mdp";
          $query=$this->pdo->prepare($sql);

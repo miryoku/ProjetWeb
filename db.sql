@@ -157,6 +157,7 @@ CREATE TABLE IF NOT EXISTS elementDeLaCommande(
     id_commande INTEGER,
     id_manga INTEGER,
     prix FLOAT,
+    quantite INT,
     FOREIGN KEY (id_manga)
 	REFERENCES  manga_tome(id) ON UPDATE CASCADE ON DELETE  NO ACTION,
     FOREIGN KEY (id_commande)
@@ -249,11 +250,11 @@ INSERT INTO etat(nom) VALUES ('fini'),('en cours'),('stoppe');
 
 INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat)VALUES("Atelier des sorciers","SHIRAHAMA Kamome","SHIRAHAMA Kamome",1,"kodansha",2),
 ('Levius','NAKATA Haruhisa','NAKATA Haruhisa',1,'ikki',1),
-("Errance","ASANO Inio","ASANO Inio",1,"Big Comic Superior",1)
+("Errance","ASANO Inio","ASANO Inio",1,"Big Comic Superior",1),
 ("Death Note","OBATA Takeshi","OHBA Tsugumi",3,"Shûeisha",1);
 
 #select * from genre;
-INSERT INTO genre_transition(id_manga,id_genre)VALUES(1,12),(1,4),(2,1),(2,28),(3,8),(3,34);
+INSERT INTO genre_transition(id_manga,id_genre)VALUES(1,12),(1,4),(2,1),(2,28),(3,8),(3,34),(4,12),(4,32);
 
 
 INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,ean,id_manga)VALUES
@@ -270,7 +271,11 @@ INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quanti
 (3,"La boxe mécanique est un sport de combat dans lequel homme et machine ne font plus qu'un ! Levius un jeune combattant qui espère atteindre le niveau 1, est attaqué par A.J, une magnifique jeune fille utilisée comme arme par Amethyst, cette grande société spécialisée dans l’armement. Levius grimpe sur le ring, bien décidé à vaincre et a libérer A.J.",
 "2016-03-18",12.70,1,"9782505064367",2),
 (1,"Le mangaka Kaoru Fukazawa vient de terminer un manga qui a eu son petit succès et qui lui a demandé beaucoup d’énergie. Mais voilà qu’il sombre dans le doute et l’incertitude ! Qu’a-t-il envie de dessiner à présent !? Doit-il choisir de se lancer dans un manga qui va se vendre, ce que son éditeur le pousse à faire, ou dans un projet plus personnel qui lui tient à coeur ? Mais, au fond, a-t-il encore vraiment quelque chose à dire par le biais de ses mangas !?",
-"2019-03-15",15.00,15,"9782505075479",3);
+"2019-03-15",15.00,15,"9782505075479",3),
+(1,"Light Yagami est un lycéen âgé de 17 ans, jeune homme brillant, fils d'un policier, il découvre un étrange carnet qui se révèle être le livre d'un dieu de la mort : Ryûk ! Light apprendra vite quels terribles pouvoirs renferment ce carnet : tous ceux dont le nom est inscrit dans le Death Note sont appelés à mourir dans les 40 secondes qui suivent !
+Les implications sont énormes et en possession d'un tel carnet Light est potentiellement capable d'imposer sa loi à un monde qu'il estime perverti. Mais peut-on choisir qui va vivre et qui va mourir ? Certaines personnes méritent-elles de mourir par la seule volonté d'un adolescent, à la fois juge et bourreau pour une sentence irrévocable ?
+En agissant de la sorte Light devient lui-même un criminel, il éveille ainsi l'attention de L, enquêteur mystérieux mandaté par Interpol. Un duel sans merci s'engage entre ces deux esprits exceptionnels !",
+"2007-01-15",6.85,30,"9782505000327",4);
 /* probleme avec wamp mais pas avec xamp pour le resume_du_tome*/
 
 
@@ -284,11 +289,16 @@ INSERT INTO avis_transition(id_manga_tome,id_avis)VALUES(1,1),(2,1),(3,3);
 
 INSERT INTO statuscommande(nom)VALUES("en cours"),("termine"),("annule");
 
-INSERT INTO commande(id_user,id_status,price,date_de_la_commande)VALUES(1,1,30,NOW()),(2,2,7.5,NOW()),(2,3,30,NOW());
-INSERT INTO elementdelacommande(id_commande,id_manga,prix)VALUES(1,1,7.50),(1,2,7.50),(1,1,7.50),(1,3,7.50),(2,1,7.50),(3,1,7.50),(3,2,7.50),(3,1,7.50),(3,3,7.50);
+INSERT INTO commande(id_user,id_status,price,date_de_la_commande)VALUES(1,1,30.00,NOW()),(2,2,7.5,NOW()),(2,3,30,NOW());
+INSERT INTO elementdelacommande(id_commande,id_manga,prix,quantite)VALUES(1,1,7.50,2),(1,2,7.50,1),(1,3,7.50,1),(2,1,7.50,1),(3,1,7.50,2),(3,2,7.50,1),(3,3,7.50,1);
 
 
+/*
+select * from commande  order by id desc limit 1;
+SELECT * FROM elementdelacommande
 
+SELECT * FROM commande 
+WHERE  price=30 AND date_de_la_commande="2021-02-19" ORDER BY id DESC LIMIT 1
 /*
 
 SELECT *

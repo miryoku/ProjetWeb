@@ -16,6 +16,7 @@ require_once('model/Commande.php');
 require_once('model/SqlCommande.php');
 require_once('model/CommandeDetail.php');
 require_once('model/SqlCommandeDetail.php');
+require_once('model/SqlSell.php');
 
 
 define('ROOT_PATH', "/projetWeb/"); // Chemin qui suit le nom de domaine. Exemple: http://monprojet.local/08_router/ le path a indiqué sera donc '/08_router/'

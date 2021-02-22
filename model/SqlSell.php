@@ -31,6 +31,21 @@ class SqlSell extends Sql{
 
     }
 
+    public function sqlUpdateCommmandeStatus($idStatus,$id){
+        $sql="UPDATE commande SET id_status=:idStatus WHERE id=:id";
+        $query=$this->pdo->prepare($sql);
+        $query->execute(array('idStatus'=>$idStatus,'id'=>$id));
+        
+    }
+
+    public function sqlUpdateCommmandeMangaTomeQuantite($quant,$id){
+        $sql="UPDATE manga_tome SET quantite_stock=:quant WHERE id=:id";
+        $query=$this->pdo->prepare($sql);
+        $query->execute(array('quant'=>$quant,'id'=>$id));
+        
+    }
+
+
 }
 
 

@@ -38,7 +38,7 @@ if(REQ_ACTION && !empty($_POST['send'])){
     $detail=$sqlMangaDetail->selectTome($manga->getId(),REQ_ACTION);
 
     include('view/mangaDetailNumber.php');
-
+ 
 }
 else if (REQ_TYPE_ID){
 

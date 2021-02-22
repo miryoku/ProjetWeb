@@ -9,5 +9,5 @@
     quantite en stock : <input type="number" name="quantite" id="" required value="<?=$detail->getQuantite_stock()?>"> 
     ean : <input type="text" name="ean" required value="<?=$detail->getEan()?>">
     <input type="submit" value="envoie">
-
+    
 </form>

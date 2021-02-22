@@ -1,6 +1,12 @@
 <?php 
 
-if(REQ_TYPE_ID){
+
+if(REQ_ACTION=="commande"){
+    $sqlSell = new SqlSell();
+    $sqlSell->sqlUpdateCommmandeStatus(3,REQ_TYPE_ID);
+    header('Location: '.ROOT_PATH.'commande');
+
+}else if(REQ_TYPE_ID){
     $SqlCommandeDetail=new SqlCommandeDetail();
     $SqlMangaDetail=new SqlMangaDetail();
     $SqlManga=new SqlManga();
@@ -16,7 +22,6 @@ if(REQ_TYPE_ID){
 
 
     }
-    
 
   /* foreach($array as $wesh){
         

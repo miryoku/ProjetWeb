@@ -164,16 +164,6 @@ CREATE TABLE IF NOT EXISTS elementDeLaCommande(
 	REFERENCES  commande(id) ON UPDATE CASCADE ON DELETE  NO ACTION
 )ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS sell(
-	id INTEGER PRIMARY KEY AUTO_INCREMENT,
-	date_sell DATE,
-	id_manga_detail INTEGER,
-	id_userdb INTEGER,
-	FOREIGN KEY(id_userdb)
-		REFERENCES userdb(id),
-	FOREIGN KEY (id_manga_detail)
-		REFERENCES manga_tome(id) ON UPDATE CASCADE ON DELETE NO ACTION
-)ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS avis_transition(
 	id_manga_tome INTEGER,
@@ -259,7 +249,7 @@ INSERT INTO genre_transition(id_manga,id_genre)VALUES(1,12),(1,4),(2,1),(2,28),(
 
 INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,ean,id_manga)VALUES
 (1,"Coco a toujours été fascinée par la magie. Hélas, seuls les sorciers peuvent pratiquer cet art et les élus sont choisis dès la naissance. Un jour, Kieffrey, un sorcier, arrive dans le village de la jeune fille. En l’espionnant,Coco comprend alors la véritable nature de la magie et se rappelle d’un livre de magie et d’un encrier qu’elle a acheté à un mystérieux inconnu quand elle était enfant. Elle s’exerce alors en cachette. Mais, dans son ignorance,Coco commet un acte tragique !Dès lors, elle devient la disciple de Kieffrey et va découvrir un monde dont elle ne soupçonnait pas l’existence !"
-,"2018-03-07",7.50,1000,"9782811638771",1),
+,"2018-03-07",7.50,1,"9782811638771",1),
 (2,"On naît sorcier, on ne le devient pas. C'est la règle. Pourtant, Kieffrey a pris Coco sous son aile et a fait d'elle sa disciple : d'humaine normale, la voilà devenue apprentie sorcière !Kieffrey, Coco et ses trois camarades se sont rendus à Carn, petite ville de sorciers, pour acheter des fournitures magiques. Mais soudain, les quatre fillettes tombent dans un piège tendu par un mystérieux sorcier encapuchonné : elles sont coincées dans une dimension parallèle et doivent échapper à un dragon !",
 "2018-06-06",7.50,900,"9782811640897",1),
 (3,"Pour sauver un jeune garçon, Coco a utilisé un sort pour transformer un rocher en sable. Mais catastrophe ! Son sort a eu bien plus de portée qu’elle ne le pensait, et tout le lit de la rivière s’est effondré en conséquence. Coco est accusée par la milice magique d’avoir eu recours à un sort interdit et condamnée à voir sa mémoire effacée. Elle est sur le point d’être bannie à jamais du monde des sorciers…",
@@ -279,8 +269,6 @@ En agissant de la sorte Light devient lui-même un criminel, il éveille ainsi l
 /* probleme avec wamp mais pas avec xamp pour le resume_du_tome*/
 
 
-INSERT INTO sell(date_sell,id_manga_detail,id_userdb) VALUES
-(NOW(),1,1),(NOW(),2,1),(NOW(),2,2),(NOW(),1,2),(NOW(),1,2),(NOW(),3,1),(NOW(),3,2),(NOW(),1,1),(NOW(),1,1),(NOW(),1,2);
 
 INSERT INTO avis(titre,commentaire,note,date_avis,id_userdb)VALUES("test","wesh ma geule",15,NOW(),1),
 ("test2","prout cacauhete",16,NOW(),2),
@@ -291,7 +279,6 @@ INSERT INTO statuscommande(nom)VALUES("en cours"),("termine"),("annule");
 
 INSERT INTO commande(id_user,id_status,price,date_de_la_commande)VALUES(1,1,30.00,NOW()),(2,2,7.5,NOW()),(2,3,30,NOW());
 INSERT INTO elementdelacommande(id_commande,id_manga,prix,quantite)VALUES(1,1,7.50,2),(1,2,7.50,1),(1,3,7.50,1),(2,1,7.50,1),(3,1,7.50,2),(3,2,7.50,1),(3,3,7.50,1);
-
 
 /*
 select * from commande  order by id desc limit 1;
@@ -317,4 +304,8 @@ select * from manga_tome;
 SELECT *
             FROM manga AS i
             WHERE   i.id = 1
+            
+            
+          
+            
 */

@@ -5,20 +5,16 @@
     print_r($manga);
 
 ?>
-    
+<?php if($detail->getQuantite_stock()!=0): ?>    
 <form action="" method="post">
     quantite  <select name="quantite">
     <option value="1" selected>1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
+    <?php for($i=2;$i<10 && $i<=$detail->getQuantite_stock();$i++): ?>
+    <option value="<?=$i?>"><?=$i?></option>
+   <?php endfor ?>
 
   </select>
     <input type="submit" name="send" value="Envoie">
 
 </form>
+<?php endif ?>

@@ -2,12 +2,11 @@
 
 if(isset($_POST['sell'])){
 
-
-    $sqlSell = new SqlSell();
+ $sqlSell = new SqlSell();
     $sqlSell->sqlInsertCommande($_SESSION['user']->getId(),$_POST['sell'],date("Y-m-d"));
-    $idCommande=$sqlSell->sqlselectLastCommande($_SESSION['user']->getId(),$_POST['sell'],date("Y-m-d"));
-    
-    foreach($_SESSION['panier'] as $panier){
+   $idCommande=$sqlSell->sqlselectLastCommande($_SESSION['user']->getId(),date("Y-m-d"));
+   print_r($idCommande); 
+   foreach($_SESSION['panier'] as $panier){
         if($panier[1]->getQuantite_stock()-$panier[2]>=0){
             $sqlSell->sqlUpdateCommmandeMangaTomeQuantite($panier[1]->getQuantite_stock()-$panier[2],$panier[1]->getId());
             $sqlSell->sqlInsertElementCommande($idCommande[0],$panier[1]->getId(),$panier[1]->getPrice(),$panier[2]);

@@ -281,31 +281,12 @@ INSERT INTO commande(id_user,id_status,price,date_de_la_commande)VALUES(1,1,30.0
 INSERT INTO elementdelacommande(id_commande,id_manga,prix,quantite)VALUES(1,1,7.50,2),(1,2,7.50,1),(1,3,7.50,1),(2,1,7.50,1),(3,1,7.50,2),(3,2,7.50,1),(3,3,7.50,1);
 
 /*
-select * from commande  order by id desc limit 1;
-SELECT * FROM elementdelacommande
 
-SELECT * FROM commande 
-WHERE  price=30 AND date_de_la_commande="2021-02-19" ORDER BY id DESC LIMIT 1
-/*
+select c.id,u.email,max(c.price) from commande as c, userdb as u where c.id_user=u.id #la plus grosse commande
+select  id_manga,sum(quantite) as top from elementdelacommande group by  id_manga  having sum(quantite)	 limit 5 
 
-SELECT *
-FROM commande AS c, userDB AS u, statuscommande AS s, elementdelacommande AS e
-WHERE c.id=e.id_commande AND c.id_status=s.id AND c.id_user=u.id;
+select * from commande
+           
 
-
-select u.id as id_user,c.id as id_commande,s.nom as status,c.price,c.date_de_la_commande as date
-from commande as c, userdb as u, statuscommande AS s
-where c.id_user=u.id AND c.id_status=s.id  and  u.email like 'maurice@maurice.bf';
-
-select * from manga_tome;
-
-
-
-SELECT *
-            FROM manga AS i
-            WHERE   i.id = 1
-            
-            
-          
             
 */

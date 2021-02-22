@@ -58,7 +58,8 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li class="dropdown-item"> <a class="dropdown-item" href="<?=ROOT_PATH?>adminManga">Administration Manga</a></li>
-            <li class="dropdown-item"> <a class="dropdown-item" href="<?=ROOT_PATH?>adminCommande">Liste commande</a></li>
+            <li class="dropdown-item"> <a class="dropdown-item" href="<?=ROOT_PATH?>adminCommande">Liste commande a traite</a></li>
+                        <li class="dropdown-item"> <a class="dropdown-item" href="<?=ROOT_PATH?>adminStatistique ">Statistique</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>

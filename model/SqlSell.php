@@ -13,15 +13,15 @@ class SqlSell extends Sql{
 
     }
 
-    public function sqlselectLastCommande($idUser,$price,$date){
+    public function sqlselectLastCommande($idUser,$date){
         $sql="SELECT id FROM commande 
-        WHERE id_user=:idUser AND price=:price AND date_de_la_commande=:dates ORDER BY id DESC LIMIT 1";
+        WHERE id_user=:idUser AND date_de_la_commande=:dates ORDER BY id DESC LIMIT 1";
         $query=$this->pdo->prepare($sql);
-        $query->execute(array('idUser'=>$idUser,'price'=>$price,'dates'=>$date));
+        $query->execute(array('idUser'=>$idUser,'dates'=>$date));
         $result=$query->fetch();
 
         return $result;
-    }
+    } 
 
     public function sqlInsertElementCommande($idCommande,$IdManga,$prix,$quant){
         $sql="insert into elementdelacommande(id_commande,id_manga,prix,quantite)

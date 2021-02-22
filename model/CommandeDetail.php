@@ -6,6 +6,7 @@ class CommandeDetail
     private $id_commande;
     private $id_manga;
     private $prix;
+    private $quantite;
 
 
     /**
@@ -84,6 +85,26 @@ class CommandeDetail
     public function setPrix($prix)
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of quantite
+     */ 
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set the value of quantite
+     *
+     * @return  self
+     */ 
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }

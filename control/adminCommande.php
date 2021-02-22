@@ -2,13 +2,28 @@
 if(REQ_ACTION){
     $sqlCommande=new SqlCommande();
     $commande=$sqlCommande->afficheIdCommande(REQ_TYPE_ID);
-    echo REQ_ACTION;
+    
     if(REQ_ACTION=="annuler"){
         $status=3;
+        $sqlCommandeDetail=new SqlCommandeDetail();
+        $commandesDetails=$sqlCommandeDetail->afficheCommandeDetailUser(REQ_TYPE_ID);
+    
+        foreach($commandesDetails as $commandesDetail){
+            
+            $SqlMangaDetail = new SqlMangaDetail();
+           $mangaDetail= $SqlMangaDetail->selectTomewithId($commandesDetail->getId_manga());
+           $sqlSell = new SqlSell();
+            $sqlSell->sqlUpdateCommmandeMangaTomeQuantite($commandesDetail->getQuantite()+ $mangaDetail->getQuantite_stock(),$commandesDetail->getId_manga());
+        
+    
+        }
     }else{
         $status=2;
     }
     $sqlCommande->updateStatusCommande(REQ_TYPE_ID, $status);
+
+
+
     header('Location: '.ROOT_PATH.'adminCommande');
 }else if(REQ_TYPE_ID){
 

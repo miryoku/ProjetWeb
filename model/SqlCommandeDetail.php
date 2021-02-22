@@ -8,7 +8,7 @@ class SqlCommandeDetail extends Sql{
     }
 
     public function afficheCommandeDetailUser($id){
-       $sql="select id,id_commande,id_manga,prix 
+       $sql="select id,id_commande,id_manga,prix,quantite 
        from elementdelacommande 
        where id_commande=:id;";
         $query=$this->pdo->prepare($sql);

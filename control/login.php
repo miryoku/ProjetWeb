@@ -7,7 +7,8 @@ if(isset($_POST['login'])&& !empty($_POST['login'])&& isset($_POST['mdp'])&& !em
     $mdpHash=password_hash($_POST['mdp'],PASSWORD_BCRYPT,['cost'=>12]);
     $user= $sqlLogin->sqlCheckEmail($_POST['login']);
 
-    if(password_verify($_POST['mdp'],$user->getMdp())){
+
+    if(!empty($user) && password_verify($_POST['mdp'],$user->getMdp())){
 
       $_SESSION['user']=$user;
         header('Location: welcome');

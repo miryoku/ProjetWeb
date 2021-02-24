@@ -283,10 +283,32 @@ INSERT INTO elementdelacommande(id_commande,id_manga,prix,quantite)VALUES(1,1,7.
 /*
 
 select c.id,u.email,max(c.price) from commande as c, userdb as u where c.id_user=u.id #la plus grosse commande
-select  id_manga,sum(quantite) as top from elementdelacommande group by  id_manga  having sum(quantite)	 limit 5 
+
+select  m.titre,mt.numero_du_tome,sum(quantite) as top 
+	from elementdelacommande as e, manga_tome as mt, manga as m
+	where e.id_manga=mt.id and m.id=mt.id_manga 
+	group by  e.id_manga  ORDER BY sum(quantite) desc limit 3 #top des vente
+	
+select  m.titre,mt.numero_du_tome,sum(quantite)
+	from elementdelacommande as e, manga_tome as mt, manga as m, commande as c 
+	where e.id_manga=mt.id and m.id=mt.id_manga and e.id_commande=c.id and c.date_de_la_commande="2021-02-24"
+	group by  e.id_manga ORDER BY sum(quantite) desc limit 3 #vente d'un jour precis
+	
+select  m.titre,mt.numero_du_tome,sum(quantite) as top,c.date_de_la_commande  
+	from elementdelacommande as e, manga_tome as mt, manga as m, commande as c 
+	where e.id_manga=mt.id and m.id=mt.id_manga and e.id_commande=c.id and c.date_de_la_commande>="2021-02-22" and c.date_de_la_commande<="2021-02-24" 
+	group by  e.id_manga  ORDER BY sum(quantite) desc limit 3 #vente d'un entre 2 jour 
+
+select count(*) from commande where date_de_la_commande="2021-02-22" #nombre de commande du jour donnée
+
+select count(*) from commande where date_de_la_commande>="2021-02-22" and date_de_la_commande<="2021-02-24"  #nombre de commande entre 2 date
+
+select avg(price) from commande  where date_de_la_commande="2021-02-22" 
 
 select * from commande
-           
+select * from elementdelacommande 
+select * from manga_tome
+select * from manga     
 
             
 */

@@ -1,5 +1,9 @@
 <?php
 
+require_once(ROOT_PATH."model/Manga.php");
+require_once(ROOT_PATH."model/DetailManga.php");
+require_once(ROOT_PATH.'model/SqlManga.php');
+require_once(ROOT_PATH.'model/SqlMangaDetail.php');
 
 if(REQ_ACTION && !empty($_POST['send'])){
 
@@ -13,7 +17,7 @@ if(REQ_ACTION && !empty($_POST['send'])){
         $_SESSION['panier']=[];
     }
 
-    
+    print_r($_SESSION['panier']);
     $bool=false;
     foreach($_SESSION['panier'] as $paniers){
        

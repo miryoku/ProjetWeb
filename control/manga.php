@@ -5,6 +5,8 @@ require_once("model/DetailManga.php");
 require_once('model/SqlManga.php');
 require_once('model/SqlMangaDetail.php');
 
+
+
 if(REQ_ACTION && !empty($_POST['send'])){
 
   

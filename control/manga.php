@@ -1,9 +1,9 @@
 <?php
 
-require_once(ROOT_PATH."model/Manga.php");
-require_once(ROOT_PATH."model/DetailManga.php");
-require_once(ROOT_PATH.'model/SqlManga.php');
-require_once(ROOT_PATH.'model/SqlMangaDetail.php');
+require_once("model/Manga.php");
+require_once("model/DetailManga.php");
+require_once('model/SqlManga.php');
+require_once('model/SqlMangaDetail.php');
 
 if(REQ_ACTION && !empty($_POST['send'])){
 

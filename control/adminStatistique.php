@@ -1,1 +1,3 @@
-coucou
+<?php
+
+include('view/adminStatistique.php');

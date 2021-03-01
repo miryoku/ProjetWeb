@@ -1,5 +1,7 @@
 <?php 
 
+
+
 if(isset($_POST['sell'])){
 
  $sqlSell = new SqlSell();

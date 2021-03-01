@@ -44,9 +44,7 @@ class SqlCommande extends Sql{
         WHERE id=:id";
         $query=$this->pdo->prepare($sql);
         $query->execute(array('idStatus'=>$idStatus,'id'=>$id)); 
-        
-        
-
     }
+
 
 } 

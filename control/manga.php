@@ -1,10 +1,11 @@
 <?php
-
+/*
 require_once("model/Manga.php");
 require_once("model/DetailManga.php");
 require_once('model/SqlManga.php');
 require_once('model/SqlMangaDetail.php');
 
+session_start();*/
 
 
 if(REQ_ACTION && !empty($_POST['send'])){
@@ -19,7 +20,7 @@ if(REQ_ACTION && !empty($_POST['send'])){
         $_SESSION['panier']=[];
     }
 
-    print_r($_SESSION['panier']);
+    //print_r($_SESSION['panier']);
     $bool=false;
     foreach($_SESSION['panier'] as $paniers){
        

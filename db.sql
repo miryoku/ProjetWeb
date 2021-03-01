@@ -228,6 +228,7 @@ INSERT INTO role_user(name_role)VALUES('admin'),('user');
 INSERT INTO userdb(nom,prenom,email,date_inscription,id_role_user,mdp)VALUES
 	("stevens","atanael","ata_@hotmail.fr",NOW(),1,"$2y$12$YRL/OOGOUliJiKgQTikypOiGiQBXp2DLDHLqoklDwekx8fMeb9Sz6"),#test
 	("maurice","maurice","maurice@maurice.bf",NOW(),2,"$2y$12$YRL/OOGOUliJiKgQTikypOiGiQBXp2DLDHLqoklDwekx8fMeb9Sz6");
+	("admin","admin","admin@admin.admin",NOW(),1,"$2y$12$YRL/OOGOUliJiKgQTikypOiGiQBXp2DLDHLqoklDwekx8fMeb9Sz6");
 
 INSERT INTO addresse(rue,numero,numBoite,cp,localite,pays,id_userdb)VALUES
 	("rue de bray","212","","7110","maurage","belgique",1),

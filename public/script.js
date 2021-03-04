@@ -1,6 +1,3 @@
-
-
-
 AppeleAsync(AfficheStat)
 
 
@@ -19,9 +16,9 @@ function Async(xhr,callback){
 	
 	xhr.onreadystatechange = function() {
 		if(this.readyState==4 && this.status==200){
-			//console.log(this.response);
+			console.log(this.response);
 			var res=this.response;
-			if(res.success){		
+			if(res.success){
 				callback(res)
 			}
 			else {
@@ -37,7 +34,7 @@ function Async(xhr,callback){
 
 
 function AfficheStat(data){
-	console.log(data.topVente)
+
 	let topVentes=data.topVente;
 
 	let stringTopVente ="<table><tr><th>Titre</th><th>numero du tome</th><th>tome vendu</th></tr>";
@@ -46,17 +43,10 @@ function AfficheStat(data){
 	topVentes.forEach((topVente) =>{
 		stringTopVente=stringTopVente+"<tr><td>"+topVente.titre+"</td><td>"+topVente.numero_du_tome+"</td><td>"+topVente.vente+"</td></tr>"
 	})
-	console.log(stringTopVente)
+
 	document.getElementById("stat").innerHTML=stringTopVente
 
-
-
-
-
-
-
 }
-
 
 
 
@@ -71,13 +61,16 @@ document.getElementById("check").addEventListener("click",function(e){
 
 
 document.getElementById("form").addEventListener("submit",function(e){
-	e.preventDefault();
-	console.log("wesh")
-	console.log(document.getElementById("date1").value)
-	console.log(document.getElementById("date2").value)
+	e.preventDefault();	
+	var data=new FormData(this);
 
 
-	AppeleAsync(AfficheStat)
+		AppeleAsync(AfficheStat,data)
+	
+
+
+
+	
 
 	/*var val = document.getElementById("value")
 	var popup = document.getElementById("myPopup");

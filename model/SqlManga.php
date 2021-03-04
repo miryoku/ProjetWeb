@@ -13,9 +13,9 @@ class SqlManga extends Sql{
 
     public function all(){
 
-    $sql="SELECT i.id,i.titre,i.dessinateur,i.scenariste,c.categorie
+    $sql="SELECT i.id,i.titre,i.dessinateur,i.scenariste,c.categorie,i.img
         FROM manga AS i,categorie AS c
-        WHERE i.id_categorie=c.id";
+        WHERE i.id_categorie=c.id and del=true";
     $query=$this->pdo->query($sql);
     $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
     $result= $query->fetchAll();
@@ -48,11 +48,11 @@ class SqlManga extends Sql{
         return $result;
     } 
 
-    public function sqlInsertManga($titre,$dessinateur,$scenariste,$editeur,$categorie){
-        $sql="INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat)
-        VALUES(:titre,:dessinateur,:scenariste,:categorie,:editeur,:id_etat)";
+    public function sqlInsertManga($titre,$dessinateur,$scenariste,$editeur,$categorie,$img){
+        $sql="INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat,img,del)
+        VALUES(:titre,:dessinateur,:scenariste,:categorie,:editeur,:id_etat,:img,:del)";
         $query=$this->pdo->prepare($sql);
-        $query->execute(array('titre'=>$titre,'dessinateur'=>$dessinateur,'scenariste'=>$scenariste,'editeur'=>$editeur,'categorie'=>$categorie,'id_etat'=>1)); 
+        $query->execute(array('titre'=>$titre,'dessinateur'=>$dessinateur,'scenariste'=>$scenariste,'editeur'=>$editeur,'categorie'=>$categorie,'id_etat'=>1,'img'=>$img,'del'=>true)); 
     }
 
     public function sqlInsertGenre($id,$genres){
@@ -63,7 +63,21 @@ class SqlManga extends Sql{
         }
     }
 
-    public function sqlUpdateManga($id,$titre,$dessinateur,$scenariste,$editeur_oeuvre_origine,$categorie){
+    public function sqlUpdateManga($id,$titre,$dessinateur,$scenariste,$editeur_oeuvre_origine,$categorie,$img){
+
+        $sql="UPDATE manga
+        SET titre = :titre, dessinateur = :dessinateur, scenariste = :scenariste,id_categorie=:id_categorie,
+        editeur_oeuvre_origine=:editeur_oeuvre_origine,id_etat=:id_etat,img=:img
+        WHERE id=:id";
+        $query=$this->pdo->prepare($sql);
+        $query->execute(array('titre'=>$titre,'dessinateur'=>$dessinateur,
+        'scenariste'=>$scenariste,'id_categorie'=>$categorie,'editeur_oeuvre_origine'=>$editeur_oeuvre_origine,'id_etat'=>1,'id'=>$id,'img'=>$img)); 
+        
+
+    }
+
+    
+    public function sqlUpdateManga1($id,$titre,$dessinateur,$scenariste,$editeur_oeuvre_origine,$categorie){
 
         $sql="UPDATE manga
         SET titre = :titre, dessinateur = :dessinateur, scenariste = :scenariste,id_categorie=:id_categorie,

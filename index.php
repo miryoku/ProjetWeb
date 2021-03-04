@@ -10,6 +10,7 @@ require_once('model/Sql.php');
 
 /* a mettre a auto load*/
 
+require_once("function/sendImg.php");
 require_once("model/User.php");
 require_once("model/Connection.php");
 require_once('model/Sql.php');

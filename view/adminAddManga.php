@@ -1,4 +1,5 @@
-<form method="post">
+
+<form method="post" enctype="multipart/form-data">
     Titre : <input type="text" name="titre" id="">
     Desinateur : <input type="text" name="desinateur" id="">
     Scenariste : <input type="text" name="scenariste" id="">
@@ -12,6 +13,7 @@
             <option value="<?=$genre[0]?>"><?=$genre[1]?></option>
         <?php endforeach;?>
     </select>
+    Image<input type="file" name="uploaded_file" id="">
     <input type="submit" value="envoie">
 
 </form>

@@ -12,6 +12,7 @@ class DetailManga extends Manga{
         private $quantite_stock;
         private $id_manga;
         private $ean;
+        private $img;
 
         
         public function __toString(){
@@ -176,6 +177,26 @@ class DetailManga extends Manga{
         public function setId_manga($id_manga)
         {
                 $this->id_manga = $id_manga;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of img
+         */ 
+        public function getImg()
+        {
+                return $this->img;
+        }
+
+        /**
+         * Set the value of img
+         *
+         * @return  self
+         */ 
+        public function setImg($img)
+        {
+                $this->img = $img;
 
                 return $this;
         }

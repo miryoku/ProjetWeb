@@ -10,8 +10,14 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         header('Location: '.ROOT_PATH.'adminManga/'.REQ_TYPE_ID);
     }else*/ if(REQ_ACTION2=="update"&& !empty($_POST['nTome'])&& !empty($_POST['resume'])&& !empty($_POST['date'])&& !empty($_POST['price'])&& !empty($_POST['quantite'])&& !empty($_POST['ean'])){
         $sqlMangaDetail=new SqlMangaDetail();
-        $sqlMangaDetail->sqlUpdateMangaDetail($_POST['id'],  $_POST['nTome'],$_POST['resume'],$_POST['date'],$_POST['price'],$_POST['quantite'],$_POST['ean']);
-        header('Location: '.ROOT_PATH.'adminManga/'.REQ_TYPE_ID);
+        if(!empty($_FILES['uploaded_file']['name'])){
+            $nomFile=insertImg($_FILES['uploaded_file']);
+            $sqlMangaDetail->sqlUpdateMangaDetail($_POST['id'],  $_POST['nTome'],$_POST['resume'],$_POST['date'],$_POST['price'],$_POST['quantite'],$_POST['ean'],$nomFile[1]);
+   
+        }else{
+            $sqlMangaDetail->sqlUpdateMangaDetail1($_POST['id'],  $_POST['nTome'],$_POST['resume'],$_POST['date'],$_POST['price'],$_POST['quantite'],$_POST['ean']);
+        }      
+       header('Location: '.ROOT_PATH.'adminManga/'.REQ_TYPE_ID);
     }else if(REQ_ACTION2=="update"){
         $sqlManga=new SqlManga();
         $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
@@ -20,8 +26,16 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         include("view/adminupdateMAngaDetail.php");
     }
     else if(REQ_TYPE_ID=="updateManga"&&!empty($_POST['titre'])&&!empty($_POST['desinateur'])&&!empty($_POST['scenariste'])&&!empty($_POST['editeur'])&&!empty($_POST['categorie'])&& !empty($_POST['states'])){
-    $sqlManga=new SqlManga();
-        $sqlManga-> sqlUpdateManga($_POST["id"],$_POST['titre'],$_POST['desinateur'],$_POST['scenariste'],$_POST['editeur'],$_POST['categorie']);
+    
+        $sqlManga=new SqlManga();
+        if(!empty($_FILES['uploaded_file']['name'])){
+            $nomFile=insertImg($_FILES['uploaded_file']);
+            $sqlManga-> sqlUpdateManga($_POST["id"],$_POST['titre'],$_POST['desinateur'],$_POST['scenariste'],$_POST['editeur'],$_POST['categorie'],$nomFile[1]);
+        
+        }else{
+            $sqlManga-> sqlUpdateManga1($_POST["id"],$_POST['titre'],$_POST['desinateur'],$_POST['scenariste'],$_POST['editeur'],$_POST['categorie']);
+        }    
+       
         $sqlManga->sqlDeleteGenre($_POST["id"]);
         $sqlManga->sqlInsertGenre($_POST["id"],$_POST["states"]);
         header('Location: '.ROOT_PATH.'adminManga');
@@ -39,8 +53,10 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
 
     }
     else if(REQ_TYPE_ID=="insertManga" &&!empty($_POST['titre'])&&!empty($_POST['desinateur'])&&!empty($_POST['scenariste'])&&!empty($_POST['editeur'])&&!empty($_POST['categorie'])&& !empty($_POST['states'])){
-        $sqlManga=new SqlManga();
-        $sqlManga->sqlInsertManga($_POST['titre'],$_POST['desinateur'],$_POST['scenariste'],$_POST['editeur'],$_POST['categorie']);
+        $nomFile=insertImg($_FILES['uploaded_file']);
+        
+       $sqlManga=new SqlManga();
+        $sqlManga->sqlInsertManga($_POST['titre'],$_POST['desinateur'],$_POST['scenariste'],$_POST['editeur'],$_POST['categorie'],$nomFile[1]);
         $recup=$sqlManga->selectTitre($_POST['titre']);
         $sqlManga->sqlInsertGenre($recup->getId(),$_POST['states']);
         header('Location: '.ROOT_PATH.'adminManga');
@@ -55,9 +71,9 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
 
     }
     else if(REQ_ACTION=="insert" && !empty($_POST['nTome'])&& !empty($_POST['resume'])&& !empty($_POST['date'])&& !empty($_POST['price'])&& !empty($_POST['quantite'])&& !empty($_POST['ean'])){
-        
+        $nomFile=insertImg($_FILES['uploaded_file']);
         $sqlMangaDetail=new SqlMangaDetail();
-        $sqlMangaDetail->sqlInsertMangaDetail($_POST['id'],  $_POST['nTome'],$_POST['resume'],$_POST['date'],$_POST['price'],$_POST['quantite'],$_POST['ean']);
+        $sqlMangaDetail->sqlInsertMangaDetail($_POST['id'],  $_POST['nTome'],$_POST['resume'],$_POST['date'],$_POST['price'],$_POST['quantite'],$_POST['ean'],$nomFile[1]);
         header('Location: '.ROOT_PATH.'adminManga/'.REQ_TYPE_ID);
     }
 

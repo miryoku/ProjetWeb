@@ -1,11 +1,5 @@
 <?php
-/*
-require_once("model/Manga.php");
-require_once("model/DetailManga.php");
-require_once('model/SqlManga.php');
-require_once('model/SqlMangaDetail.php');
 
-session_start();*/
 
 
 if(REQ_ACTION && !empty($_POST['send'])){

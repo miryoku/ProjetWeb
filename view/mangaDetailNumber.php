@@ -2,9 +2,10 @@
     echo $manga;
     echo "</br>";
     echo $detail;
-    print_r($manga);
+    print_r($detail);
 
 ?>
+<img src="/projetWeb/img/<?= $detail->getImg() ?>" alt="">
 <?php if($detail->getQuantite_stock()!=0): ?>    
 <form action="" method="post">
     quantite  <select name="quantite">

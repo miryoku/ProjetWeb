@@ -103,6 +103,8 @@ CREATE TABLE IF NOT EXISTS manga(
     editeur_oeuvre_origine VARCHAR(255),
     id_categorie INTEGER,
     id_etat INTEGER,
+    img TEXT,
+    del BOOL,
     FOREIGN KEY (id_categorie)
 	REFERENCES  categorie(id) ON UPDATE CASCADE ON DELETE  NO ACTION,
     FOREIGN KEY (id_etat)
@@ -128,12 +130,11 @@ CREATE TABLE IF NOT EXISTS manga_tome(
     resume_du_tome TEXT,
     date_de_sortie DATE,
     price FLOAT,
-    id_image INTEGER,
+    img TEXT,
     quantite_stock INTEGER,
     id_manga INTEGER,
     ean VARCHAR(20),
-   FOREIGN KEY (id_image)
-	REFERENCES  image(id) ON UPDATE CASCADE ON DELETE  NO ACTION,
+    del BOOL,
     FOREIGN KEY (id_manga)
 	REFERENCES manga(id) ON UPDATE CASCADE ON DELETE NO ACTION
 )ENGINE=INNODB;
@@ -239,34 +240,34 @@ INSERT INTO etat(nom) VALUES ('fini'),('en cours'),('stoppe');
 
 
 
-INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat)VALUES("Atelier des sorciers","SHIRAHAMA Kamome","SHIRAHAMA Kamome",1,"kodansha",2),
-('Levius','NAKATA Haruhisa','NAKATA Haruhisa',1,'ikki',1),
-("Errance","ASANO Inio","ASANO Inio",1,"Big Comic Superior",1),
-("Death Note","OBATA Takeshi","OHBA Tsugumi",3,"Shûeisha",1);
+INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat,del,img)VALUES("Atelier des sorciers","SHIRAHAMA Kamome","SHIRAHAMA Kamome",1,"kodansha",2,TRUE,"Atelier.png"),
+('Levius','NAKATA Haruhisa','NAKATA Haruhisa',1,'ikki',1,TRUE,"Levius.png"),
+("Errance","ASANO Inio","ASANO Inio",1,"Big Comic Superior",1,TRUE,"errance.jpg"),
+("Death Note","OBATA Takeshi","OHBA Tsugumi",3,"Shûeisha",1,TRUE,"Death.jpg");
 
 #select * from genre;
 INSERT INTO genre_transition(id_manga,id_genre)VALUES(1,12),(1,4),(2,1),(2,28),(3,8),(3,34),(4,12),(4,32);
 
 
-INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,ean,id_manga)VALUES
+INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,ean,id_manga,del,img)VALUES
 (1,"Coco a toujours été fascinée par la magie. Hélas, seuls les sorciers peuvent pratiquer cet art et les élus sont choisis dès la naissance. Un jour, Kieffrey, un sorcier, arrive dans le village de la jeune fille. En l’espionnant,Coco comprend alors la véritable nature de la magie et se rappelle d’un livre de magie et d’un encrier qu’elle a acheté à un mystérieux inconnu quand elle était enfant. Elle s’exerce alors en cachette. Mais, dans son ignorance,Coco commet un acte tragique !Dès lors, elle devient la disciple de Kieffrey et va découvrir un monde dont elle ne soupçonnait pas l’existence !"
-,"2018-03-07",7.50,1,"9782811638771",1),
+,"2018-03-07",7.50,1,"9782811638771",1,TRUE,"atelier1.jpg"),
 (2,"On naît sorcier, on ne le devient pas. C'est la règle. Pourtant, Kieffrey a pris Coco sous son aile et a fait d'elle sa disciple : d'humaine normale, la voilà devenue apprentie sorcière !Kieffrey, Coco et ses trois camarades se sont rendus à Carn, petite ville de sorciers, pour acheter des fournitures magiques. Mais soudain, les quatre fillettes tombent dans un piège tendu par un mystérieux sorcier encapuchonné : elles sont coincées dans une dimension parallèle et doivent échapper à un dragon !",
-"2018-06-06",7.50,900,"9782811640897",1),
+"2018-06-06",7.50,900,"9782811640897",1,TRUE,"atelier2.jpg"),
 (3,"Pour sauver un jeune garçon, Coco a utilisé un sort pour transformer un rocher en sable. Mais catastrophe ! Son sort a eu bien plus de portée qu’elle ne le pensait, et tout le lit de la rivière s’est effondré en conséquence. Coco est accusée par la milice magique d’avoir eu recours à un sort interdit et condamnée à voir sa mémoire effacée. Elle est sur le point d’être bannie à jamais du monde des sorciers…",
-"2018-10-03",7.50,800,"9782811643942",1),
+"2018-10-03",7.50,800,"9782811643942",1,TRUE,"atelier3.jpg"),
 (1,"Au XIXe siècle de la nouvelle ère, après une guerre dévastatrice qui a tué son père et plongé sa mère dans le coma, le jeune Levius Cromwell vit avec son oncle Zack. Dans la capitale, un nouvel art martial fait fureur : la boxe mécanique. Des lutteurs équipés de membres mécaniques s’affrontent violemment dans une arène. Levius va y révéler d’étonnantes prédispositions ! S’annonce alors un combat au sommet qui pourrait bien avoir des répercussions sur l’avenir de la civilisation…",
-"2015-10-01",12.70,5,'9782505064343',2),
+"2015-10-01",12.70,5,'9782505064343',2,TRUE,"levius1.jpg"),
 (2,"La boxe mécanique est un nouvel art martial dans lequel des lutteurs équipés de membres mécaniques s’affrontent. Levius, jeune lutteur, s’apprête à livrer un combat contre Hugo, son principal rival, et ainsi gagner son ticket pour le niveau I, la ligue professionnelle. Mais contre toute attente, Hugo est mis en pièce par A.J., une jolie guerrière soutenue par Amethyst, un groupe industriel obscur auquel Levius voue une profond haine.",
-"2016-01-22",12.70,2,"9782505064350",2),
+"2016-01-22",12.70,2,"9782505064350",2,TRUE,"levius2.jpg"),
 (3,"La boxe mécanique est un sport de combat dans lequel homme et machine ne font plus qu'un ! Levius un jeune combattant qui espère atteindre le niveau 1, est attaqué par A.J, une magnifique jeune fille utilisée comme arme par Amethyst, cette grande société spécialisée dans l’armement. Levius grimpe sur le ring, bien décidé à vaincre et a libérer A.J.",
-"2016-03-18",12.70,1,"9782505064367",2),
+"2016-03-18",12.70,1,"9782505064367",2,TRUE,"levius3.jpg"),
 (1,"Le mangaka Kaoru Fukazawa vient de terminer un manga qui a eu son petit succès et qui lui a demandé beaucoup d’énergie. Mais voilà qu’il sombre dans le doute et l’incertitude ! Qu’a-t-il envie de dessiner à présent !? Doit-il choisir de se lancer dans un manga qui va se vendre, ce que son éditeur le pousse à faire, ou dans un projet plus personnel qui lui tient à coeur ? Mais, au fond, a-t-il encore vraiment quelque chose à dire par le biais de ses mangas !?",
-"2019-03-15",15.00,15,"9782505075479",3),
+"2019-03-15",15.00,15,"9782505075479",3,TRUE,"errance1.jpg"),
 (1,"Light Yagami est un lycéen âgé de 17 ans, jeune homme brillant, fils d'un policier, il découvre un étrange carnet qui se révèle être le livre d'un dieu de la mort : Ryûk ! Light apprendra vite quels terribles pouvoirs renferment ce carnet : tous ceux dont le nom est inscrit dans le Death Note sont appelés à mourir dans les 40 secondes qui suivent !
 Les implications sont énormes et en possession d'un tel carnet Light est potentiellement capable d'imposer sa loi à un monde qu'il estime perverti. Mais peut-on choisir qui va vivre et qui va mourir ? Certaines personnes méritent-elles de mourir par la seule volonté d'un adolescent, à la fois juge et bourreau pour une sentence irrévocable ?
 En agissant de la sorte Light devient lui-même un criminel, il éveille ainsi l'attention de L, enquêteur mystérieux mandaté par Interpol. Un duel sans merci s'engage entre ces deux esprits exceptionnels !",
-"2007-01-15",6.85,30,"9782505000327",4);
+"2007-01-15",6.85,30,"9782505000327",4,TRUE,"Death1.jpg");
 /* probleme avec wamp mais pas avec xamp pour le resume_du_tome*/
 
 
@@ -283,7 +284,7 @@ INSERT INTO elementdelacommande(id_commande,id_manga,prix,quantite)VALUES(1,1,7.
 
 /*
 
-select c.id,u.email,max(c.price) from commande as c, userdb as u where c.id_user=u.id #la plus grosse commande
+select c.id,u.email,max(c.price) from commande as c, userdb as u where c.id_user=u.id and c.date_de_la_commande>="2021-02-01" and c.date_de_la_commande<="2021-03-01" 
 
 select  m.titre,mt.numero_du_tome,sum(quantite) as top 
 	from elementdelacommande as e, manga_tome as mt, manga as m
@@ -292,15 +293,15 @@ select  m.titre,mt.numero_du_tome,sum(quantite) as top
 	
 select  m.titre,mt.numero_du_tome,sum(quantite)
 	from elementdelacommande as e, manga_tome as mt, manga as m, commande as c 
-	where e.id_manga=mt.id and m.id=mt.id_manga and e.id_commande=c.id and c.date_de_la_commande="2021-02-24"
+	where e.id_manga=mt.id and m.id=mt.id_manga and e.id_commande=c.id and c.date_de_la_commande="2021-03-03"
 	group by  e.id_manga ORDER BY sum(quantite) desc limit 3 #vente d'un jour precis
 	
 select  m.titre,mt.numero_du_tome,sum(quantite) as top,c.date_de_la_commande  
 	from elementdelacommande as e, manga_tome as mt, manga as m, commande as c 
-	where e.id_manga=mt.id and m.id=mt.id_manga and e.id_commande=c.id and c.date_de_la_commande>="2021-02-22" and c.date_de_la_commande<="2021-02-24" 
+	where e.id_manga=mt.id and m.id=mt.id_manga and e.id_commande=c.id and c.date_de_la_commande>="2021-02-01" and c.date_de_la_commande<="2021-03-30" 
 	group by  e.id_manga  ORDER BY sum(quantite) desc limit 3 #vente d'un entre 2 jour 
 
-select count(*) from commande where date_de_la_commande="2021-02-22" #nombre de commande du jour donnée
+select count(*) from commande where date_de_la_commande="2021-03-03" #nombre de commande du jour donnée
 
 select count(*) from commande where date_de_la_commande>="2021-02-22" and date_de_la_commande<="2021-02-24"  #nombre de commande entre 2 date
 
@@ -309,7 +310,15 @@ select avg(price) from commande  where date_de_la_commande="2021-02-22"
 select * from commande
 select * from elementdelacommande 
 select * from manga_tome
-select * from manga     
+select * from manga    
+select * from userdb 
 
+
+select c.id,u.email,max(c.price) as max from commande as c, userdb as u where c.id_user=u.id
+and c.date_de_la_commande>='2021-02-30' and c.date_de_la_commande<='2021-03-30'         
+            
+            SELECT id,numero_du_tome,date_de_sortie,price,quantite_stock,id_manga 
+        FROM manga_tome 
+        WHERE del=true and id_manga =2
             
 */

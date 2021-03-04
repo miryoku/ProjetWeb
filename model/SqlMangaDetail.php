@@ -10,7 +10,7 @@ class SqlMangaDetail extends Sql{
     public function all($id){
     $sql="SELECT id,numero_du_tome,date_de_sortie,price,quantite_stock,id_manga 
         FROM manga_tome 
-        WHERE id_manga = ".$id;
+        WHERE del=true and id_manga = ".$id;
     $query=$this->pdo->query($sql);
     $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
     $result= $query->fetchAll();
@@ -18,7 +18,7 @@ class SqlMangaDetail extends Sql{
     }
 
     public function selectTome($tome,$num){
-        $sql="SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean 
+        $sql="SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean,img 
             FROM manga_tome 
             WHERE id_manga = :id_item and numero_du_tome = :numero_du_tome";
         $query=$this->pdo->prepare($sql);
@@ -30,15 +30,24 @@ class SqlMangaDetail extends Sql{
 
     }
 
-    public function sqlInsertMangaDetail($id,$nbTome,$resume,$date,$price,$quantite,$ean){
-        $sql="INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean)
-        VALUES(:nbTome,:resum,:dat,:price,:quantite,:id,:ean);";
+    public function sqlInsertMangaDetail($id,$nbTome,$resume,$date,$price,$quantite,$ean,$img){
+        $sql="INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean,img)
+        VALUES(:nbTome,:resum,:dat,:price,:quantite,:id,:ean,:img);";
         $query=$this->pdo->prepare($sql);
-        $query->execute(array('nbTome'=>$nbTome,'resum'=>$resume,'dat'=>$date,'price'=>$price,'quantite'=>$quantite,'id'=>$id,'ean'=>$ean)); 
+        $query->execute(array('nbTome'=>$nbTome,'resum'=>$resume,'dat'=>$date,'price'=>$price,'quantite'=>$quantite,'id'=>$id,'ean'=>$ean,'img'=>$img)); 
     
     }
 
-    public function sqlUpdateMangaDetail($id,$nbTome,$resume,$date,$price,$quantite,$ean){
+    public function sqlUpdateMangaDetail($id,$nbTome,$resume,$date,$price,$quantite,$ean,$img){
+        $sql="UPDATE manga_tome
+        SET  numero_du_tome = :nbTome, resume_du_tome =  :resum, date_de_sortie = :dat,quantite_stock=:quantite,price=:price,ean=:ean,img=:img
+        WHERE id=:id";
+        $query=$this->pdo->prepare($sql);
+        $query->execute(array('nbTome'=>$nbTome,'resum'=>$resume,'dat'=>$date,'price'=>$price,'quantite'=>$quantite,'id'=>$id,'ean'=>$ean,'img'=>$img)); 
+    
+    }
+
+    public function sqlUpdateMangaDetail1($id,$nbTome,$resume,$date,$price,$quantite,$ean){
         $sql="UPDATE manga_tome
         SET  numero_du_tome = :nbTome, resume_du_tome =  :resum, date_de_sortie = :dat,quantite_stock=:quantite,price=:price,ean=:ean
         WHERE id=:id";
@@ -54,7 +63,7 @@ class SqlMangaDetail extends Sql{
     }*/
 
     public function selectTomewithId($id){
-        $sql="SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean 
+        $sql="SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean,img
             FROM manga_tome 
             WHERE id = :id";
         $query=$this->pdo->prepare($sql);

@@ -1,4 +1,5 @@
-<form method="post">
+
+<form method="post"  enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?= $manga->getId() ?>">
     Titre : <input type="text" name="titre" id="" value="<?= $manga->getTitre() ?> ">
     Desinateur : <input type="text" name="desinateur" id="" value="<?= $manga->getDessinateur() ?>">
@@ -17,6 +18,7 @@
             <option value="<?=$genre[0]?>" <?php  if(isset($recupGenre[$j][0]) && strcmp($recupGenre[$j][0],$genre[1])==0):?> selected <?php $j++ ?> <?php endif ?>><?=$genre[1]?></option>
     <?php endforeach;?>
     </select>
+    Image<input type="file" name="uploaded_file" id="">
     <input type="submit" value="envoie">
 </form>
 

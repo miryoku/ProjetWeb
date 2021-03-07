@@ -37,7 +37,7 @@ if(REQ_ACTION && !empty($_POST['send'])){
     $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
     $sqlMangaDetail=new SqlMangaDetail();
     $detail=$sqlMangaDetail->selectTome($manga->getId(),REQ_ACTION);
-
+    $manga->setGenre($sqlManga->selectGenre($manga->getId()));
     include('view/mangaDetailNumber.php');
  
 }
@@ -47,7 +47,7 @@ else if (REQ_TYPE_ID){
     $sqlManga=new SqlManga();
     $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
     $sqlMangaDetail=new SqlMangaDetail();
-    $detail=$sqlMangaDetail->all($manga->getId());
+    $details=$sqlMangaDetail->all($manga->getId());
 
 
     include('view/mangaDetail.php');

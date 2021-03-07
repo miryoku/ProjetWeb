@@ -1,1 +1,3 @@
-<h1>404</h1>
+<div id="body">    
+    <div id="P404">404</div>
+</div>

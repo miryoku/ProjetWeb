@@ -59,6 +59,10 @@ require_once('../model/SqlStat.php');
             $top=$sqlStat->selectTopVente($_POST['quant'],$_POST['date2']);
             $NombreDecommande=$sqlStat->selectNombreDeLeNombreDecommande($_POST['date2']);
             $moyenneDesCommande=$sqlStat->selectMoyenDesCommandes($_POST['date2']);
+        } else if(!empty($_POST['quant'])){
+            $top=$sqlStat->selectTopVente($_POST['quant']);
+            $NombreDecommande=$sqlStat->selectNombreDeLeNombreDecommande();
+            $moyenneDesCommande=$sqlStat->selectMoyenDesCommandes();
         }else{
             $top=$sqlStat->selectTopVente();
             $NombreDecommande=$sqlStat->selectNombreDeLeNombreDecommande();

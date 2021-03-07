@@ -8,7 +8,7 @@ class SqlMangaDetail extends Sql{
     }
 
     public function all($id){
-    $sql="SELECT id,numero_du_tome,date_de_sortie,price,quantite_stock,id_manga 
+    $sql="SELECT id,numero_du_tome,date_de_sortie,price,quantite_stock,id_manga,img
         FROM manga_tome 
         WHERE del=true and id_manga = ".$id;
     $query=$this->pdo->query($sql);
@@ -31,10 +31,10 @@ class SqlMangaDetail extends Sql{
     }
 
     public function sqlInsertMangaDetail($id,$nbTome,$resume,$date,$price,$quantite,$ean,$img){
-        $sql="INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean,img)
-        VALUES(:nbTome,:resum,:dat,:price,:quantite,:id,:ean,:img);";
+        $sql="INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean,img,del)
+        VALUES(:nbTome,:resum,:dat,:price,:quantite,:id,:ean,:img,:del);";
         $query=$this->pdo->prepare($sql);
-        $query->execute(array('nbTome'=>$nbTome,'resum'=>$resume,'dat'=>$date,'price'=>$price,'quantite'=>$quantite,'id'=>$id,'ean'=>$ean,'img'=>$img)); 
+        $query->execute(array('nbTome'=>$nbTome,'resum'=>$resume,'dat'=>$date,'price'=>$price,'quantite'=>$quantite,'id'=>$id,'ean'=>$ean,'img'=>$img,'del'=>true)); 
     
     }
 
@@ -74,6 +74,5 @@ class SqlMangaDetail extends Sql{
         return $result;
 
     }
-
 
 }

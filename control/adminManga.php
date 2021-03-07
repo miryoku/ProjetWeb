@@ -53,13 +53,14 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
 
     }
     else if(REQ_TYPE_ID=="insertManga" &&!empty($_POST['titre'])&&!empty($_POST['desinateur'])&&!empty($_POST['scenariste'])&&!empty($_POST['editeur'])&&!empty($_POST['categorie'])&& !empty($_POST['states'])){
-        $nomFile=insertImg($_FILES['uploaded_file']);
-        
+       $nomFile=insertImg($_FILES['uploaded_file']);
+        echo $_POST['categorie'];
        $sqlManga=new SqlManga();
         $sqlManga->sqlInsertManga($_POST['titre'],$_POST['desinateur'],$_POST['scenariste'],$_POST['editeur'],$_POST['categorie'],$nomFile[1]);
         $recup=$sqlManga->selectTitre($_POST['titre']);
-        $sqlManga->sqlInsertGenre($recup->getId(),$_POST['states']);
+        //$sqlManga->sqlInsertGenre($recup->getId(),$_POST['states']);
         header('Location: '.ROOT_PATH.'adminManga');
+
         
     }
     else if(REQ_TYPE_ID=="insertManga"){
@@ -71,6 +72,8 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
 
     }
     else if(REQ_ACTION=="insert" && !empty($_POST['nTome'])&& !empty($_POST['resume'])&& !empty($_POST['date'])&& !empty($_POST['price'])&& !empty($_POST['quantite'])&& !empty($_POST['ean'])){
+
+       
         $nomFile=insertImg($_FILES['uploaded_file']);
         $sqlMangaDetail=new SqlMangaDetail();
         $sqlMangaDetail->sqlInsertMangaDetail($_POST['id'],  $_POST['nTome'],$_POST['resume'],$_POST['date'],$_POST['price'],$_POST['quantite'],$_POST['ean'],$nomFile[1]);
@@ -90,6 +93,7 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
         $sqlMangaDetail=new SqlMangaDetail();
         $detail=$sqlMangaDetail->selectTome($manga->getId(),REQ_ACTION);
+        $manga->setGenre($sqlManga->selectGenre($manga->getId()));
         include('view/mangaDetailNumber.php');
 
 

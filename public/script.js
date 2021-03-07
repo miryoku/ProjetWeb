@@ -36,14 +36,11 @@ function Async(xhr,callback){
 function AfficheStat(data){
 
 	let topVentes=data.topVente;
-
-	let stringTopVente ="<table><tr><th>Titre</th><th>numero du tome</th><th>tome vendu</th></tr>";
-
-	
+	let stringTopVente ='<table class="table table-striped"><thead><tr><th scope="col">Titre</th><th scope="col">numero du tome</th><th scope="col">tome vendu</th></tr></thead><tbody>';
 	topVentes.forEach((topVente) =>{
 		stringTopVente=stringTopVente+"<tr><td>"+topVente.titre+"</td><td>"+topVente.numero_du_tome+"</td><td>"+topVente.vente+"</td></tr>"
 	})
-
+	stringTopVente=stringTopVente+"</tbody></table>"
 	document.getElementById("stat").innerHTML=stringTopVente
 
 }
@@ -61,30 +58,77 @@ document.getElementById("check").addEventListener("click",function(e){
 
 
 document.getElementById("form").addEventListener("submit",function(e){
-	e.preventDefault();	
-	var data=new FormData(this);
-
-
-		AppeleAsync(AfficheStat,data)
-	
-
-
-
-	
-
-	/*var val = document.getElementById("value")
-	var popup = document.getElementById("myPopup");
-	console.log(popup.classList)
-	if(val.value.length!=0){
-	//popup.classList.toggle("show");//permet de supprime si il existe et d'ajoute si il existe pas
-	popup.classList.add("show")
-	}else{
-		popup.classList.remove("show")
-	}	
 	e.preventDefault();
+	document.getElementById("stat").innerHTML=""
+
+
 	var data=new FormData(this);
-	AppeleAsync(AfficheListPopUp,data)
-	return false;*/
+	if(document.getElementById("checkGraph").checked ){
+		AppeleAsync(AfficheChart,data)
+	}else{
+		
+		AppeleAsync(AfficheStat,data)
+	}
+
+
+
+
 });
+
+
+function AfficheChart(data){
+	var topVenteTitre = []
+	var topVentreQuantite= []
+	data.topVente.forEach(topVente => {
+		topVenteTitre.push(topVente.titre+' T'+topVente.numero_du_tome)
+		topVentreQuantite.push(topVente.vente)
+	});
+	
+	var canvas = document.createElement("canvas");   
+	canvas.id = "myChart"; 
+	canvas.width=400;
+	canvas.height=400;    
+	console.log(canvas)        
+	document.getElementById("stat").appendChild(canvas)          
+
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {	
+    type: 'bar',
+    data: {
+        labels: topVenteTitre,
+        datasets: [{
+            label: 'Ventes',
+            data: topVentreQuantite,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+	
+});
+}
 
 

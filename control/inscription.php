@@ -12,8 +12,6 @@ isset($_POST['mdp'])&& !empty($_POST['mdp'])){
 
         $sqlLogin=new SqlLogin();
         $result= $sqlLogin->SqlCheckEmail($_POST['email']);
-        print_r($result);
-
         if(empty($result)){
 
             $mdpHash=password_hash($_POST['mdp'],PASSWORD_BCRYPT,['cost'=>12]);

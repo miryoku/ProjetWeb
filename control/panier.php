@@ -5,7 +5,7 @@
 if(isset($_POST['sell'])){
 
  $sqlSell = new SqlSell();
-    $sqlSell->sqlInsertCommande($_SESSION['user']->getId(),$_POST['sell'],date("Y-m-d"));
+    $sqlSell->sqlInsertCommande($_SESSION['user']->getId(),$_SESSION['sumPanier'],date("Y-m-d"));
    $idCommande=$sqlSell->sqlselectLastCommande($_SESSION['user']->getId(),date("Y-m-d"));
    print_r($idCommande); 
    foreach($_SESSION['panier'] as $panier){
@@ -16,8 +16,9 @@ if(isset($_POST['sell'])){
             //mettre le tome qui ne rengistre pas pour l'affiche plus loins
         }
     }
-    //bug de l'insertion de tome avec une double decimal 
+   
     unset($_SESSION['panier']);
+    unset($_SESSION['sumPanier']);
     header('Location: '.ROOT_PATH);
 
 }else{
@@ -30,6 +31,16 @@ if(isset($_POST['sell'])){
 
     $totArticle=0;
     $tot=0;
+
+    if(isset($_SESSION['panier'])){
+        foreach($_SESSION['panier'] as $paniers){
+            $totArticle=$totArticle+$paniers[2];
+            $tot=$tot+$paniers[1]->getPrice()*$paniers[2];
+        }
+        $_SESSION['sumPanier']=$tot;
+    }
+    
+
     include('view/panier.php');
 
 }

@@ -6,18 +6,21 @@
     <title>Document</title>
    
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
+
+   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+-->
+  <script src="/projetWeb/public/bootstrap.js"></script>
+   <link rel="stylesheet" href="/projetWeb/public/bootstrap.css">
     <link rel="stylesheet" href="/projetWeb/public/style.css">
   </head>
 <body>
-  <p>sss</p>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
   <a class="navbar-brand" href="<?=ROOT_PATH?>">
-        <img src="logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
-            insert un nom
+        <img src="/projetWeb/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            Manga
         </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

@@ -48,6 +48,16 @@ class SqlManga extends Sql{
         return $result;
     } 
 
+    public function selectGenre($id){
+
+        $sql="SELECT g.nom FROM genre_transition AS gt, genre AS g WHERE gt.id_genre=g.id AND id_manga=:id";
+        $query=$this->pdo->prepare($sql);
+        $query->execute(['id'=>$id]);
+        $result=$query->fetchall();
+        return $result;
+
+    }
+
     public function sqlInsertManga($titre,$dessinateur,$scenariste,$editeur,$categorie,$img){
         $sql="INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat,img,del)
         VALUES(:titre,:dessinateur,:scenariste,:categorie,:editeur,:id_etat,:img,:del)";
@@ -62,6 +72,8 @@ class SqlManga extends Sql{
             $query->execute(array('id'=>$id,'id_genre'=>$genre)); 
         }
     }
+
+
 
     public function sqlUpdateManga($id,$titre,$dessinateur,$scenariste,$editeur_oeuvre_origine,$categorie,$img){
 
@@ -95,6 +107,22 @@ class SqlManga extends Sql{
         $query=$this->pdo->prepare($sql);
         $query->execute(array('id'=>$id)); 
     }
+
+
+    public function LastManga(){
+
+        $sql="select  m.id,m.titre,m.dessinateur,m.scenariste,m.img,c.categorie 
+        from manga as m,categorie as c 
+        where m.id_categorie=c.id and del=true group by id desc limit 3;";
+        $query=$this->pdo->query($sql);
+        $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
+        $result= $query->fetchAll();
+    
+    
+        return $result;
+    
+        }
+
 
 
 }

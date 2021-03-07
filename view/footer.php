@@ -1,13 +1,9 @@
 <footer>
 
-ceci est un footer
-<?php
-
-
-
-
-
-?>
+<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+        Projet Developpement web e-commerce Atanael STEVENS
+  </div>
 
 </footer>
 

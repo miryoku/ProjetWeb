@@ -1,15 +1,43 @@
-<p><?= $manga->getTitre() ?></p>
 
 
-<form method="post" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="<?= $detail->getId() ?>">
-    Numero du tome : <input type="number" name="nTome" id="" required value="<?=$detail->getNumero_du_tome()?>">
-    Resume du tome : <textarea name="resume" id="" cols="30" rows="10" required ><?=$detail->getResume_du_tome()?></textarea>
-    Date de sortie : <input type="date" name="date" id="" required value="<?=$detail->getDate_de_sortie()?>">
-    Prix : <input type="number" name="price" required value="<?=$detail->getPrice()?>">
-    quantite en stock : <input type="number" name="quantite" id="" required value="<?=$detail->getQuantite_stock()?>"> 
-    ean : <input type="text" name="ean" required value="<?=$detail->getEan()?>">
-    Image<input type="file" name="uploaded_file" id="" >
-    <input type="submit" value="envoie">
-    
-</form>
+
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <h5 class="card-title"><?= $manga->getTitre() ?></h5>
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<?= $manga->getId() ?>">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Numero du tome </label>
+                <input type="number" class="form-control" id="nTome" aria-describedby="nTomeHelp" name="nTome" required value="<?=$detail->getNumero_du_tome()?>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Resume du tome </label>
+                <textarea class="form-control" name="resume" rows="5" required><?=$detail->getResume_du_tome()?></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Date de sortie </label>
+                <input type="date" class="form-control" id="date" aria-describedby="dateHelp" name="date" required value="<?=$detail->getDate_de_sortie()?>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Prix </label>
+                <input type="number" class="form-control" id="price" aria-describedby="priceHelp" name="price" required value="<?=$detail->getPrice()?>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">quantite en stock </label>
+                <input type="number" class="form-control" id="quantite" aria-describedby="quantiteHelp" name="quantite" required value="<?=$detail->getQuantite_stock()?>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">ean </label>
+                <input type="text" class="form-control" id="ean" aria-describedby="eanHelp" name="ean" required value="<?=$detail->getEan()?>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Image </label>
+                <input type="file" class="form-control" id="uploaded_file" aria-describedby="ImageHelp" name="uploaded_file">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col-sm-2"></div>
+</div>

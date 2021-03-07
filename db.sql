@@ -89,6 +89,8 @@ CREATE TABLE IF NOT EXISTS genre(
    def_genre TEXT
 )ENGINE=INNODB;
 
+
+
 CREATE TABLE IF NOT EXISTS etat(
 	id INTEGER PRIMARY KEY AUTO_INCREMENT,
 	nom VARCHAR(50)
@@ -255,7 +257,7 @@ INSERT INTO manga_tome(numero_du_tome,resume_du_tome,date_de_sortie,price,quanti
 (2,"On naît sorcier, on ne le devient pas. C'est la règle. Pourtant, Kieffrey a pris Coco sous son aile et a fait d'elle sa disciple : d'humaine normale, la voilà devenue apprentie sorcière !Kieffrey, Coco et ses trois camarades se sont rendus à Carn, petite ville de sorciers, pour acheter des fournitures magiques. Mais soudain, les quatre fillettes tombent dans un piège tendu par un mystérieux sorcier encapuchonné : elles sont coincées dans une dimension parallèle et doivent échapper à un dragon !",
 "2018-06-06",7.50,900,"9782811640897",1,TRUE,"atelier2.jpg"),
 (3,"Pour sauver un jeune garçon, Coco a utilisé un sort pour transformer un rocher en sable. Mais catastrophe ! Son sort a eu bien plus de portée qu’elle ne le pensait, et tout le lit de la rivière s’est effondré en conséquence. Coco est accusée par la milice magique d’avoir eu recours à un sort interdit et condamnée à voir sa mémoire effacée. Elle est sur le point d’être bannie à jamais du monde des sorciers…",
-"2018-10-03",7.50,800,"9782811643942",1,TRUE,"atelier3.jpg"),
+"2018-10-03",7.50,800,"9782811643942",1,TRUE,"atelierde3.jpg"),
 (1,"Au XIXe siècle de la nouvelle ère, après une guerre dévastatrice qui a tué son père et plongé sa mère dans le coma, le jeune Levius Cromwell vit avec son oncle Zack. Dans la capitale, un nouvel art martial fait fureur : la boxe mécanique. Des lutteurs équipés de membres mécaniques s’affrontent violemment dans une arène. Levius va y révéler d’étonnantes prédispositions ! S’annonce alors un combat au sommet qui pourrait bien avoir des répercussions sur l’avenir de la civilisation…",
 "2015-10-01",12.70,5,'9782505064343',2,TRUE,"levius1.jpg"),
 (2,"La boxe mécanique est un nouvel art martial dans lequel des lutteurs équipés de membres mécaniques s’affrontent. Levius, jeune lutteur, s’apprête à livrer un combat contre Hugo, son principal rival, et ainsi gagner son ticket pour le niveau I, la ligue professionnelle. Mais contre toute attente, Hugo est mis en pièce par A.J., une jolie guerrière soutenue par Amethyst, un groupe industriel obscur auquel Levius voue une profond haine.",
@@ -307,10 +309,11 @@ select count(*) from commande where date_de_la_commande>="2021-02-22" and date_d
 
 select avg(price) from commande  where date_de_la_commande="2021-02-22" 
 
-select * from commande
-select * from elementdelacommande 
-select * from manga_tome
+select * from commande;
+select * from elementdelacommande; 
+select * from manga_tome where id_manga=1
 select * from manga    
+
 select * from userdb 
 
 
@@ -320,5 +323,17 @@ and c.date_de_la_commande>='2021-02-30' and c.date_de_la_commande<='2021-03-30'
             SELECT id,numero_du_tome,date_de_sortie,price,quantite_stock,id_manga 
         FROM manga_tome 
         WHERE del=true and id_manga =2
+        
+   SELECT g.nom FROM genre_transition AS gt, genre AS g WHERE gt.id_genre=g.id AND id_manga=2
+     
+        INSERT INTO manga(titre,dessinateur,scenariste,id_categorie,editeur_oeuvre_origine,id_etat,img,del)
+        VALUES("test","test","test",1,"test",1,"test",1);
+        
+        
+        
+   select  m.id,m.titre,m.dessinateur,m.scenariste,m.img,c.categorie from manga as m,categorie as c where m.id_categorie=c.id and del=true group by id desc limit 3;
+   select  id,numero_du_tome,resume_du_tome,date_de_sortie,price,img, id_manga from manga_tome where del=true group by id desc limit 3;
+   
+        
             
 */

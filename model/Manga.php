@@ -9,18 +9,8 @@ class Manga
     private $editeur_oeuvre_origine;
     private $categorie;
     private $genre;
+    private $img;
 
-
-
-    public function insertAllData($id,$titre,$dessinateur,$scenariste,$editeur_oeuvre_origine,$categorie,$genre){
-        setId($id);
-        setTitre($titre);
-        setDessinateur($dessinateur);
-        setScenariste($scenariste);
-        setEditeur_oeuvre_origine($editeur_oeuvre_origine);
-        setCategorie($categorie);
-        setGenre($genre);
-    }
 
 
     public function __toString(){
@@ -30,6 +20,27 @@ class Manga
     public function getTitreUrl(){
         return  str_replace(" ", "-", $this->titre);
         
+    }
+
+
+        /**
+     * Get the value of categorie
+     */ 
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * Set the value of categorie
+     *
+     * @return  self
+     */ 
+    public function setImg($img)
+    {
+        $this->img = $img;
+
+        return $this;
     }
 
 

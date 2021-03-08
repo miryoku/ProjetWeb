@@ -1,6 +1,14 @@
 <?php 
 
 
+require_once('model/SqlLogin.php');
+require_once('model/SqlnotObject.php');
+require_once('model/Commande.php');
+require_once('model/SqlCommande.php');
+require_once('model/CommandeDetail.php');
+require_once('model/SqlCommandeDetail.php');
+require_once('model/SqlSell.php');
+
 
 if(isset($_POST['sell'])){
 

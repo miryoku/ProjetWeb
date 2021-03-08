@@ -2,6 +2,7 @@
 
 
 
+
 if(REQ_ACTION && !empty($_POST['send'])){
 
   
@@ -17,7 +18,7 @@ if(REQ_ACTION && !empty($_POST['send'])){
     //print_r($_SESSION['panier']);
     $bool=false;
     foreach($_SESSION['panier'] as $paniers){
-       
+        
         if($paniers[0]->getTitre()==$manga->getTitre() && $paniers[1]->getNumero_du_tome()==$detail->getNumero_du_tome()){
             $_SESSION['panier'][0][2]=$paniers[2]+$_POST['quantite'];
             $bool=true;

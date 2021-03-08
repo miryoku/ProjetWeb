@@ -1,6 +1,7 @@
 <?php
 
-
+require_once("function/sendImg.php");
+require_once('model/SqlnotObject.php');
 if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
 
 

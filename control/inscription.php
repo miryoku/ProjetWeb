@@ -1,6 +1,6 @@
 <?php
 
-
+require_once('model/SqlLogin.php');
 if(isset($_SESSION['user'])){
 
     include('view/inscrit.php');

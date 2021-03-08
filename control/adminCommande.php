@@ -1,5 +1,8 @@
 <?php
-
+require_once('model/Commande.php');
+require_once('model/SqlCommande.php');
+require_once('model/commandeDetail.php'); 
+require_once('model/SqlCommandeDetail.php');
 if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){ 
     if(REQ_ACTION){
         $sqlCommande=new SqlCommande();

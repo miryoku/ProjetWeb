@@ -1,5 +1,16 @@
 <?php 
- 
+
+
+
+require_once('model/SqlLogin.php');
+require_once('model/SqlnotObject.php');
+require_once('model/Commande.php');
+require_once('model/SqlCommande.php'); 
+require_once('model/SqlCommandeDetail.php');
+require_once('model/commandeDetail.php');
+require_once('model/SqlSell.php');
+
+
 if(!empty($_SESSION['user'])){
     if(REQ_ACTION=="commande"){
         $sqlSell = new SqlSell();
@@ -15,8 +26,8 @@ if(!empty($_SESSION['user'])){
             include('view/404.php');
             exit();
         }
-        
         $arrays=[];
+
 
         foreach($details as $detail){
             $list=[];

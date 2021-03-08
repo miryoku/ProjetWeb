@@ -21,8 +21,16 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
     }else if(REQ_ACTION2=="update"){
         $sqlManga=new SqlManga();
         $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
+        if(empty($manga)){
+            include('view/404.php');
+            exit();
+        }
         $sqlMangaDetail=new SqlMangaDetail();
         $detail=$sqlMangaDetail->selectTome($manga->getId(),REQ_ACTION);
+        if(empty($detail)){
+            include('view/404.php');
+            exit();
+        }
         include("view/adminupdateMAngaDetail.php");
     }
     else if(REQ_TYPE_ID=="updateManga"&&!empty($_POST['titre'])&&!empty($_POST['desinateur'])&&!empty($_POST['scenariste'])&&!empty($_POST['editeur'])&&!empty($_POST['categorie'])&& !empty($_POST['states'])){
@@ -48,6 +56,10 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         $SqlnotObject=new SqlNotObject();
         $categories=$SqlnotObject->afficheCategoryAll();
         $genres=$SqlnotObject->afficheGenreAll();
+        if(empty($manga)){
+            include('view/404.php');
+            exit();
+        }
         $recupGenre=$SqlnotObject->RecupGenre($manga->getId());
         include("view/adminUpdateManga.php");
 
@@ -92,7 +104,15 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         $sqlManga=new SqlManga();
         $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
         $sqlMangaDetail=new SqlMangaDetail();
+        if(empty($manga)){
+            include('view/404.php');
+            exit();
+        }
         $detail=$sqlMangaDetail->selectTome($manga->getId(),REQ_ACTION);
+        if(empty($detail)){
+            include('view/404.php');
+            exit();
+        }
         $manga->setGenre($sqlManga->selectGenre($manga->getId()));
         include('view/mangaDetailNumber.php');
 
@@ -101,6 +121,11 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
 
         $sqlManga=new SqlManga();
         $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
+        if(empty($manga)){
+            include('view/404.php');
+            exit();
+        }
+        
         $sqlMangaDetail=new SqlMangaDetail();
         $details=$sqlMangaDetail->all($manga->getId());
         include('view/adminMangaDetail.php');
@@ -111,6 +136,8 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         $SqlManga=new SqlManga();
         $mangas=$SqlManga->all();
         include('view/adminManga.php');
+    }else{
+        include('view/404.php');
     }
 
 }else{include('view/404.php');}

@@ -4,12 +4,13 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
     if(REQ_ACTION){
         $sqlCommande=new SqlCommande();
         $commande=$sqlCommande->afficheIdCommande(REQ_TYPE_ID);
+
         
         if(REQ_ACTION=="annuler"){
             $status=3;
             $sqlCommandeDetail=new SqlCommandeDetail();
             $commandesDetails=$sqlCommandeDetail->afficheCommandeDetailUser(REQ_TYPE_ID);
-        
+
             foreach($commandesDetails as $commandesDetail){
                 
                 $SqlMangaDetail = new SqlMangaDetail();
@@ -23,9 +24,6 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
             $status=2;
         }
         $sqlCommande->updateStatusCommande(REQ_TYPE_ID, $status);
-
-
-
         header('Location: '.ROOT_PATH.'adminCommande');
     }else if(REQ_TYPE_ID){
 
@@ -35,6 +33,10 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         $SqlManga=new SqlManga();
         $details=$SqlCommandeDetail->afficheCommandeDetailUser(REQ_TYPE_ID);
         $arrays=[];
+        if(empty($details)){
+            include('view/404.php');
+            exit();
+        }
 
         foreach($details as $detail){
             $list=[];

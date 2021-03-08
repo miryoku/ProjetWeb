@@ -35,8 +35,16 @@ if(REQ_ACTION && !empty($_POST['send'])){
 
     $sqlManga=new SqlManga();
     $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
+    if(empty($manga)){
+        include('view/404.php');
+        exit();
+    }
     $sqlMangaDetail=new SqlMangaDetail();
     $detail=$sqlMangaDetail->selectTome($manga->getId(),REQ_ACTION);
+    if(empty($detail)){
+        include('view/404.php');
+        exit();
+    }
     $manga->setGenre($sqlManga->selectGenre($manga->getId()));
     include('view/mangaDetailNumber.php');
  
@@ -46,10 +54,12 @@ else if (REQ_TYPE_ID){
 
     $sqlManga=new SqlManga();
     $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
+    if(empty($manga)){
+        include('view/404.php');
+        exit();
+    }
     $sqlMangaDetail=new SqlMangaDetail();
     $details=$sqlMangaDetail->all($manga->getId());
-
-
     include('view/mangaDetail.php');
 
 

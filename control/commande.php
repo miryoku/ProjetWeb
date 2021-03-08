@@ -11,6 +11,11 @@ if(!empty($_SESSION['user'])){
         $SqlMangaDetail=new SqlMangaDetail();
         $SqlManga=new SqlManga();
         $details=$SqlCommandeDetail->afficheCommandeDetailUser(REQ_TYPE_ID);
+        if(empty($details)){
+            include('view/404.php');
+            exit();
+        }
+        
         $arrays=[];
 
         foreach($details as $detail){

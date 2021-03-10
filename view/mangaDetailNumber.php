@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-2"></div>
-    <div class="col-sm-3"><img src="/projetWeb/img/<?=$detail->getImg()?>" class="card-img-top" alt="image du tome <?=$detail->getNumero_du_tome() ?> du manga <?= $manga->getTitre()?>"></div>
+    <div class="col-sm-3"><img src="/<?=RACINE?>/img/<?=$detail->getImg()?>" class="card-img-top" alt="image du tome <?=$detail->getNumero_du_tome() ?> du manga <?= $manga->getTitre()?>"></div>
     <div class="col-sm-5">
         <table class="table">
             <tbody>

@@ -10,19 +10,20 @@ require_once('model/SqlCommandeDetail.php');
 require_once('model/SqlSell.php');
 
 
+
+
 if(isset($_POST['sell'])){
 
- $sqlSell = new SqlSell();
+    $sqlSell = new SqlSell();
     $sqlSell->sqlInsertCommande($_SESSION['user']->getId(),$_SESSION['sumPanier'],date("Y-m-d"));
-   $idCommande=$sqlSell->sqlselectLastCommande($_SESSION['user']->getId(),date("Y-m-d"));
-   print_r($idCommande); 
-   foreach($_SESSION['panier'] as $panier){
-        if($panier[1]->getQuantite_stock()-$panier[2]>=0){
+    $idCommande=$sqlSell->sqlselectLastCommande($_SESSION['user']->getId(),date("Y-m-d"));
+    foreach($_SESSION['panier'] as $panier){
+        //if($panier[1]->getQuantite_stock()-$panier[2]>=0){
             $sqlSell->sqlUpdateCommmandeMangaTomeQuantite($panier[1]->getQuantite_stock()-$panier[2],$panier[1]->getId());
             $sqlSell->sqlInsertElementCommande($idCommande[0],$panier[1]->getId(),$panier[1]->getPrice(),$panier[2]);
-        }else{
+        /*}else{
             //mettre le tome qui ne rengistre pas pour l'affiche plus loins
-        }
+        }*/
     }
    
     unset($_SESSION['panier']);

@@ -6,7 +6,7 @@
            
                 <div class="col-sm-3">
                     <div class="card" >
-                    <img src="/projetWeb/img/<?=$manga->getImg()?>" class="card-img-top" alt="image du manga <?=$manga->getTitre() ?>" >
+                    <img src="/<?=RACINE?>/img/<?=$manga->getImg()?>" class="card-img-top" alt="image du manga <?=$manga->getTitre() ?>" >
                         <div class="card-body">
                             <h5 class="card-title"><?=$manga->getTitre()?></h5>
                             <?php if($manga->getDessinateur()==$manga->getScenariste()): ?>

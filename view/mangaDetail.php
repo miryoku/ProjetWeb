@@ -25,7 +25,7 @@
     <?php foreach($details as $detail):?>
         <div class="col-sm-3">
             <div class="card" >
-            <img src="/projetWeb/img/<?=$detail->getImg()?>" class="card-img-top" alt="image du tome <?=$detail->getNumero_du_tome() ?> du manga <?= $manga->getTitre()?>">
+            <img src="/<?=RACINE?>/img/<?=$detail->getImg()?>" class="card-img-top" alt="image du tome <?=$detail->getNumero_du_tome() ?> du manga <?= $manga->getTitre()?>">
                 <div class="card-body">
                     <h5 class="card-title"><?=$detail->getNumero_du_tome() ?></h5>
                     <a href="<?=REQ_TYPE_ID?>/<?=$detail->getNumero_du_tome()?>" class="btn btn-primary">Detail du tome</a>

@@ -4,22 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-   
+    <script src="/<?=RACINE?>/public/jquery-3.5.1.slim.min.js"></script>
+    <script src="/<?=RACINE?>/public/bootstrap.min.js"></script>
 
 
 
+ 
    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 -->
-  <script src="/projetWeb/public/bootstrap.js"></script>
-   <link rel="stylesheet" href="/projetWeb/public/bootstrap.css">
-    <link rel="stylesheet" href="/projetWeb/public/style.css">
+<script src="/<?=RACINE?>/public/chart.js"></script>
+
+  <script src="/<?=RACINE?>/public/bootstrap.js"></script>
+  
+<script src="/<?=RACINE?>/public/script.js" defer></script>
+   <link rel="stylesheet" href="/<?=RACINE?>/public/bootstrap.css">
+    <link rel="stylesheet" href="/<?=RACINE?>/public/style.css">
   </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
   <a class="navbar-brand" href="<?=ROOT_PATH?>">
-        <img src="/projetWeb/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="/<?=RACINE?>/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
             Manga
         </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,11 +82,34 @@
           <a class="nav-link" href="<?=ROOT_PATH?>panier">Panier</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <form class="d-flex" id="search">
+        <input class="form-control me-2" id="p" name="p"  type="text" placeholder="Search" aria-label="Search">
+        
+        <button type="submit" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter">
+        Search
+        </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          
+        <div class="modal-body" id="ici">
+          ...
+        </div>
+
+      </div>
+    </div>
+  </div>
+      
+</form>
     </div>
   </div>
 </nav>
+
+
+
+
+
+
 

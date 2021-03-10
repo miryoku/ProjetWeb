@@ -314,6 +314,8 @@ select * from elementdelacommande;
 select * from manga_tome where id_manga=1
 select * from manga    
 
+update
+
 select * from userdb 
 
 
@@ -334,6 +336,11 @@ and c.date_de_la_commande>='2021-02-30' and c.date_de_la_commande<='2021-03-30'
    select  m.id,m.titre,m.dessinateur,m.scenariste,m.img,c.categorie from manga as m,categorie as c where m.id_categorie=c.id and del=true group by id desc limit 3;
    select  id,numero_du_tome,resume_du_tome,date_de_sortie,price,img, id_manga from manga_tome where del=true group by id desc limit 3;
    
+      UPDATE manga_tome
+        SET  quantite_stock=-10
+        WHERE id=1 
         
-            
+        
+        select * from manga where titre like "a%"
+          select * from manga where titre like :name  
 */

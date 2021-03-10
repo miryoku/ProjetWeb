@@ -8,10 +8,10 @@ require_once('../model/SqlStat.php');
 
 
 
-    $records = array();
+
 
     $success =1 ;
-    $msg="une erreur est survenue (script.php)";
+    $msg="une erreur est survenue (stat.php)";
     $sqlStat=new SqlStat();
 
 

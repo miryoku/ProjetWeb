@@ -6,7 +6,7 @@
                 <?php foreach($mangas as $manga): ?>
                     <div class="col-sm-4">
                         <div class="card" >
-                        <img src="/projetWeb/img/<?=$manga->getImg()?>" class="card-img-top" alt="image du manga <?=$manga->getTitre() ?>" >
+                        <img src="/<?=RACINE?>/img/<?=$manga->getImg()?>" class="card-img-top" alt="image du manga <?=$manga->getTitre() ?>" >
                             <div class="card-body">
                                 <h5 class="card-title"><?=$manga->getTitre()?></h5>
                                 <p class="card-text"><?=$manga->getCategorie()?></p>

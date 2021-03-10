@@ -1,4 +1,4 @@
-<script src="/projetWeb/public/chart.js"></script>
+
 
 <div class="row">
     <div class="col-sm-2"></div>
@@ -44,5 +44,3 @@
 
 
 
-
-<script src="/projetWeb/public/script.js"></script>

@@ -1,4 +1,4 @@
-var racine="projetweb"
+var racine="projetWeb"
 
 var stat =document.getElementById("stat");
 var check=document.getElementById("check")

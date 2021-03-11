@@ -1,15 +1,17 @@
 <?php
-
+ 
 require_once("function/sendImg.php");
 require_once('model/SqlnotObject.php');
+
 if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
 
 
-    /*if(REQ_ACTION2=="delete"){
+    if(REQ_ACTION2=="delete"){
+        echo REQ_ACTION;
         $sqlMangaDetail=new SqlMangaDetail();
         $sqlMangaDetail->sqlDeleteMangaDetail(REQ_ACTION);
         header('Location: '.ROOT_PATH.'adminManga/'.REQ_TYPE_ID);
-    }else*/ if(REQ_ACTION2=="update"&& !empty($_POST['nTome'])&& !empty($_POST['resume'])&& !empty($_POST['date'])&& !empty($_POST['price'])&& !empty($_POST['quantite'])&& !empty($_POST['ean'])){
+    }else if(REQ_ACTION2=="update"&& !empty($_POST['nTome'])&& !empty($_POST['resume'])&& !empty($_POST['date'])&& !empty($_POST['price'])&& !empty($_POST['quantite'])&& !empty($_POST['ean'])){
         $sqlMangaDetail=new SqlMangaDetail();
         if(!empty($_FILES['uploaded_file']['name'])){
             $nomFile=insertImg($_FILES['uploaded_file']);
@@ -20,6 +22,7 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         }      
        header('Location: '.ROOT_PATH.'adminManga/'.REQ_TYPE_ID);
     }else if(REQ_ACTION2=="update"){
+        include('view/header.php');
         $sqlManga=new SqlManga();
         $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
         if(empty($manga)){
@@ -33,6 +36,13 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
             exit();
         }
         include("view/adminupdateMAngaDetail.php");
+    }
+    else if(REQ_TYPE_ID=="delete"){
+        
+        $sqlManga=new SqlManga();
+        $sqlManga->sqlDeleteManga(REQ_ACTION);
+        header('Location: '.ROOT_PATH.'adminManga');
+        
     }
     else if(REQ_TYPE_ID=="updateManga"&&!empty($_POST['titre'])&&!empty($_POST['desinateur'])&&!empty($_POST['scenariste'])&&!empty($_POST['editeur'])&&!empty($_POST['categorie'])&& !empty($_POST['states'])){
     
@@ -51,7 +61,7 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         
     }
     else if(REQ_TYPE_ID=="updateManga"){
-    
+        include('view/header.php');
         $sqlManga=new SqlManga();
         $manga=$sqlManga->selectTitre(REQ_ACTION);
         $SqlnotObject=new SqlNotObject();
@@ -77,7 +87,7 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         
     }
     else if(REQ_TYPE_ID=="insertManga"){
-
+        include('view/header.php');
         $SqlnotObject=new SqlNotObject();
         $categories=$SqlnotObject->afficheCategoryAll();
         $genres=$SqlnotObject->afficheGenreAll();
@@ -94,14 +104,14 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
     }
 
     else if(REQ_ACTION=="insert"){
-    
+        include('view/header.php');
         $sqlManga=new SqlManga();
         $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
         include('view/adminMangaDetailAjout.php');
     }
 
     else if(REQ_ACTION){
-
+        include('view/header.php');
         $sqlManga=new SqlManga();
         $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
         $sqlMangaDetail=new SqlMangaDetail();
@@ -119,7 +129,7 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
 
 
     }else if (REQ_TYPE_ID){
-
+        include('view/header.php');
         $sqlManga=new SqlManga();
         $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
         if(empty($manga)){
@@ -133,15 +143,18 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
 
 
     }else if(REQ_TYPE) {
-
+        include('view/header.php');
         $SqlManga=new SqlManga();
         $mangas=$SqlManga->all();
         include('view/adminManga.php');
     }else{
+        include('view/header.php');
         include('view/404.php');
     }
 
-}else{include('view/404.php');}
+}else{ include('view/header.php');
+    include('view/404.php');}
+include('view/footer.php');
 
 
 

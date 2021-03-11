@@ -2,7 +2,6 @@
 require_once('model/SqlLogin.php');
 
 
-
 if(isset($_POST['login'])&& !empty($_POST['login'])&& isset($_POST['mdp'])&& !empty($_POST['mdp'])){
 
     $sqlLogin = new SqlLogin();
@@ -27,9 +26,12 @@ if(isset($_POST['login'])&& !empty($_POST['login'])&& isset($_POST['mdp'])&& !em
 }elseif(!empty($_POST['login'])||!empty($_POST['mdp'])){
     /*manque un element dans l'envoie */
     $_POST['error']=1;
+    include('view/header.php');
     include('view/login.php');
 
 
 }else{
+    include('view/header.php');
    include('view/login.php');
 }
+include('view/footer.php');

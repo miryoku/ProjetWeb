@@ -18,11 +18,11 @@ class SqlCommande extends Sql{
 
         return $result;
     }
-
-    public function afficheAllCommandeNotTermine(){
-        $sql="SELECT c.id,id_user,s.nom AS status,price,date_de_la_commande as date FROM commande AS c , statuscommande AS s WHERE c.id_status=s.id  AND c.id_status <>2 AND c.id_status <>3";
+ 
+    public function afficheAllCommandeTypeStatus($val){
+        $sql="SELECT c.id,id_user,s.nom AS status,price,date_de_la_commande as date FROM commande AS c , statuscommande AS s WHERE c.id_status=s.id  AND c.id_status =:val";
         $query=$this->pdo->prepare($sql);
-        $query->execute();
+        $query->execute(array('val'=>$val));
         $query->setFetchMode(PDO::FETCH_CLASS,$this->class);
         $result=$query->fetchall();
 

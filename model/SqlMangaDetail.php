@@ -56,11 +56,13 @@ class SqlMangaDetail extends Sql{
     
     }
 
-    /*public function sqlDeleteMangaDetail($id){
-        $sql="delete from manga_tome where id=:id";
+    public function sqlDeleteMangaDetail($id){
+        $sql="UPDATE manga_tome
+        SET  del=:del
+        WHERE id=:id";
         $query=$this->pdo->prepare($sql);
-        $query->execute(array('id'=>$id)); 
-    }*/
+        $query->execute(array('id'=>$id,'del'=>false)); 
+    }
 
     public function selectTomewithId($id){
         $sql="SELECT id,numero_du_tome,resume_du_tome,date_de_sortie,price,quantite_stock,id_manga,ean,img

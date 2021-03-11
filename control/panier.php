@@ -11,7 +11,6 @@ require_once('model/SqlSell.php');
 
 
 
-
 if(isset($_POST['sell'])){
 
     $sqlSell = new SqlSell();
@@ -31,6 +30,7 @@ if(isset($_POST['sell'])){
     header('Location: '.ROOT_PATH);
 
 }else{
+    include('view/header.php');
     if(!empty($_POST['delete'])){
         array_splice($_SESSION['panier'],$_POST['delete'],1);
         if(count($_SESSION['panier'])==0){
@@ -52,4 +52,4 @@ if(isset($_POST['sell'])){
 
     include('view/panier.php');
 
-}
+}include('view/footer.php');

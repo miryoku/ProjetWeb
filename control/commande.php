@@ -18,6 +18,7 @@ if(!empty($_SESSION['user'])){
         header('Location: '.ROOT_PATH.'commande');
 
     }else if(REQ_TYPE_ID){
+        include('view/header.php');
         $SqlCommandeDetail=new SqlCommandeDetail();
         $SqlMangaDetail=new SqlMangaDetail();
         $SqlManga=new SqlManga();
@@ -42,9 +43,12 @@ if(!empty($_SESSION['user'])){
 
 
     }else if(REQ_TYPE) {
+        include('view/header.php');
         $SqlCommande=new SqlCommande();
         $commandes=$SqlCommande->afficheCommandeAllUser($_SESSION['user']->getEmail());
         include('view/commandeListUser.php');
 
     }
-}else{include('view/404.php');}
+}else{include('view/header.php');
+    include('view/404.php');}
+include('view/footer.php');

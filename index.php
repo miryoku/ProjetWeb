@@ -33,7 +33,7 @@ require_once('model/SqlSell.php');
 */
 
 
-define('ROOT_PATH', "/projetWeb/"); // Chemin qui suit le nom de domaine. Exemple: http://monprojet.local/08_router/ le path a indiqué sera donc '/08_router/'
+define('ROOT_PATH', "/".RACINE."/"); // Chemin qui suit le nom de domaine. Exemple: http://monprojet.local/08_router/ le path a indiqué sera donc '/08_router/'
 $request = str_replace(ROOT_PATH, "", $_SERVER['REQUEST_URI']); // On récupère juste la request, sans le chemin du dossier.
 $request = trim($request, '/'); // Permer de supprimer le slash devant la request si elle existe
 $segments = array_filter(explode('/', $request)); // On découpe la requête pour obtenir une liste et on supprime les éléments Null
@@ -48,7 +48,7 @@ define('REQ_ACTION2', $segments[3] ?? Null);
 $file = 'control/'.REQ_TYPE.'.php';
 
 session_start();
-require_once('view/header.php');
+
 
 
 if(file_exists($file)){ // On vérifie que le fichier php existe
@@ -61,6 +61,6 @@ else {
 
 }
 
-require_once('view/footer.php');
+
 
 ?>

@@ -31,9 +31,10 @@ if(REQ_ACTION && !empty($_POST['send'])){
     array_push($array,$manga,$detail,$_POST['quantite']);
     array_push($_SESSION['panier'],$array);}
     header('Location: '.ROOT_PATH.'panier');
+    exit();
 
 }else if(REQ_ACTION){
-
+    include('view/header.php');
     $sqlManga=new SqlManga();
     $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
     if(empty($manga)){
@@ -52,7 +53,7 @@ if(REQ_ACTION && !empty($_POST['send'])){
 }
 else if (REQ_TYPE_ID){
 
-
+    include('view/header.php');
     $sqlManga=new SqlManga();
     $manga=$sqlManga->selectTitre(REQ_TYPE_ID);
     if(empty($manga)){
@@ -65,7 +66,7 @@ else if (REQ_TYPE_ID){
 
 
 }else if(REQ_TYPE) {
-
+    include('view/header.php');
     $SqlManga=new SqlManga();
     $mangas=$SqlManga->all();
     include('view/manga.php');
@@ -74,7 +75,4 @@ else if (REQ_TYPE_ID){
 
 
 
-
-
-
-
+include('view/footer.php');

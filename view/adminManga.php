@@ -7,7 +7,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Titre</th>
                     <th scope="col">Type</th>
-                    <th  colspan="2"><a href="<?=REQ_TYPE?>/insertManga">Ajoute une nouvelle serie</a></th>
+                    <th  colspan="3"><a href="<?=REQ_TYPE?>/insertManga">Ajoute une nouvelle serie</a></th>
                 </tr>
             </thead>
             <tbody>
@@ -18,6 +18,7 @@
             <td><?= $manga->getCategorie()?></td>
             <td><a href="<?=REQ_TYPE?>/<?= $manga->getTitreUrl()?>">selection</a></td>
             <td><a href="<?=REQ_TYPE?>/updateManga/<?=$manga->getTitreUrl()?>">Modifier</a></td>
+            <td><a href="<?=REQ_TYPE?>/delete/<?=$manga->getId()?>">delete</a></td>
         </tr>
     <?php endforeach ?>
             </tbody>

@@ -108,6 +108,14 @@ class SqlManga extends Sql{
         $query->execute(array('id'=>$id)); 
     }
 
+    public function sqlDeleteManga($id){
+        $sql="UPDATE manga
+        SET del=:del
+        WHERE id=:id";
+        $query=$this->pdo->prepare($sql);
+        $query->execute(array('id'=>$id,'del'=>false)); 
+        
+    }
 
     public function LastManga(){
 

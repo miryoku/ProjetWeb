@@ -3,6 +3,8 @@ require_once('model/Commande.php');
 require_once('model/SqlCommande.php');
 require_once('model/commandeDetail.php'); 
 require_once('model/SqlCommandeDetail.php');
+require_once('model/SqlSell.php');
+
 if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){ 
     if(REQ_ACTION){
         $sqlCommande=new SqlCommande();
@@ -13,12 +15,13 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
             $status=3;
             $sqlCommandeDetail=new SqlCommandeDetail();
             $commandesDetails=$sqlCommandeDetail->afficheCommandeDetailUser(REQ_TYPE_ID);
-
+            $SqlMangaDetail = new SqlMangaDetail();
+            $sqlSell = new SqlSell();
             foreach($commandesDetails as $commandesDetail){
                 
-                $SqlMangaDetail = new SqlMangaDetail();
+                
                 $mangaDetail= $SqlMangaDetail->selectTomewithId($commandesDetail->getId_manga());
-                $sqlSell = new SqlSell();
+                
                 $sqlSell->sqlUpdateCommmandeMangaTomeQuantite($commandesDetail->getQuantite()+ $mangaDetail->getQuantite_stock(),$commandesDetail->getId_manga());
             
         
@@ -30,10 +33,12 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         header('Location: '.ROOT_PATH.'adminCommande');
     }else if(REQ_TYPE_ID){
 
-
+        include('view/header.php');
         $SqlCommandeDetail=new SqlCommandeDetail();
         $SqlMangaDetail=new SqlMangaDetail();
         $SqlManga=new SqlManga();
+        $sqlCommande=new SqlCommande();
+        $commande=$sqlCommande->afficheIdCommande(REQ_TYPE_ID);
         $details=$SqlCommandeDetail->afficheCommandeDetailUser(REQ_TYPE_ID);
         $arrays=[];
         if(empty($details)){
@@ -49,12 +54,17 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
             array_push($arrays,$list);
 
         }
-    
+        
         include("view/adminAfficheCommandeDetail.php");
     }else  if(REQ_TYPE){
-        
+        include('view/header.php');
         $sqlCommande=new SqlCommande();
-        $commandes=$sqlCommande->afficheAllCommandeNotTermine();
+        $commandesEnCours=$sqlCommande->afficheAllCommandeTypeStatus(1);
+        $commandesFini=$sqlCommande->afficheAllCommandeTypeStatus(2);
+        $commandesAnnul=$sqlCommande->afficheAllCommandeTypeStatus(3);
         include("view/adminAfficheCommande.php");
     }
-}else{include('view/404.php');}
+}else{
+    include('view/header.php');
+    include('view/404.php');}
+include('view/footer.php');

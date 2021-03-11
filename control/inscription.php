@@ -1,8 +1,9 @@
 <?php
 
 require_once('model/SqlLogin.php');
-if(isset($_SESSION['user'])){
 
+if(isset($_SESSION['user'])){
+    include('view/header.php');
     include('view/inscrit.php');
 
 }else if(isset($_POST['nom'])&& !empty($_POST['nom'])&&
@@ -29,10 +30,11 @@ isset($_POST['mdp'])&& !empty($_POST['mdp'])){
         }
 
 }elseif(!empty($_POST['nom'])||!empty($_POST['prenom'])||!empty($_POST['email'])||!empty($_POST['mdp'])){
-
+    include('view/header.php');
     $_POST['error']=2;
     include('view/inscription.php');
 
-}else{    
+}else{    include('view/header.php');
    include('view/inscription.php');
 }
+include('view/footer.php');

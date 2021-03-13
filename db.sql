@@ -343,4 +343,36 @@ and c.date_de_la_commande>='2021-02-30' and c.date_de_la_commande<='2021-03-30'
         
         select * from manga where titre like "a%"
           select * from manga where titre like :name  
-*/
+          
+          SELECT c.id,id_user,s.nom AS status,price,date_de_la_commande as date FROM commande AS c , statuscommande AS s WHERE c.id_status=s.id  AND c.id_status =1
+          select id,id_commande,id_manga,prix,quantite 
+       from elementdelacommande 
+       where id_commande=1;
+       SELECT c.id,id_user,s.nom AS status,price,date_de_la_commande as date FROM commande AS c , statuscommande AS s WHERE c.id_status=s.id and c.id=1
+       
+       
+       
+       
+       SELECT i.id,i.titre,i.dessinateur,i.scenariste,c.categorie,i.img
+        FROM manga AS i,categorie AS c
+        WHERE i.id_categorie=c.id and del=true  and id_categorie=3
+        
+        
+        
+        select  m.id,m.titre,m.dessinateur,m.scenariste,m.img,c.categorie 
+        from manga as m,categorie as c 
+        where m.id_categorie=c.id and del=true group by id desc limit 3;
+        
+        select * from manga_tome
+        
+        select mt.id,mt.numero_du_tome,mt.img,mt.id_manga, m.titre from manga_tome as mt, manga as m where m.id=mt.id_manga group by id desc limit 3;
+        select mt.id,mt.numero_du_tome,mt.img,mt.id_manga from manga_tome as mt group by id desc limit 3
+        
+        SELECT i.id,i.titre,i.dessinateur,i.scenariste,i.editeur_oeuvre_origine,c.categorie
+            FROM manga AS i,categorie AS c
+            WHERE i.id_categorie=c.id and i.id = 2
+        
+        
+        */
+
+

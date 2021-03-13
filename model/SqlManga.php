@@ -11,12 +11,19 @@ class SqlManga extends Sql{
        
     }
 
-    public function all(){
+    public function all($genre=0){
 
     $sql="SELECT i.id,i.titre,i.dessinateur,i.scenariste,c.categorie,i.img
         FROM manga AS i,categorie AS c
         WHERE i.id_categorie=c.id and del=true";
-    $query=$this->pdo->query($sql);
+ 
+    if($genre!=0){
+        $sql.=" and i.id_categorie=:genre";  
+        $query=$this->pdo->prepare($sql);
+        $query->execute(['genre'=>$genre]);
+    }else{
+        $query=$this->pdo->query($sql);
+    }
     $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
     $result= $query->fetchAll();
 

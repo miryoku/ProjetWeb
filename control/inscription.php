@@ -24,7 +24,7 @@ isset($_POST['mdp'])&& !empty($_POST['mdp'])){
     
             
         }else{
-            
+            include('view/header.php');
             $_POST['error']=1;
             include('view/inscription.php');
         }

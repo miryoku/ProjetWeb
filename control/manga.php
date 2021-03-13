@@ -66,9 +66,20 @@ else if (REQ_TYPE_ID){
 
 
 }else if(REQ_TYPE) {
+    require_once('model/SqlnotObject.php');
     include('view/header.php');
+
     $SqlManga=new SqlManga();
-    $mangas=$SqlManga->all();
+    if(!empty($_POST['categorie'])){
+        $mangas=$SqlManga->all($_POST['categorie']); 
+    }else{
+        $mangas=$SqlManga->all();
+    }
+
+
+    
+    $sqlGenre=new SqlnotObject();
+    $categories=$sqlGenre->afficheCategoryAll();
     include('view/manga.php');
 }
 

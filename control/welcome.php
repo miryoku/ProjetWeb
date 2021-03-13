@@ -7,9 +7,18 @@ require_once('model/SqlManga.php');
 
 include('view/header.php');
 
-$SqlManga=new SqlManga();
-$mangas=$SqlManga->LastManga();
+$sqlManga=new SqlManga();
+$mangas=$sqlManga->LastManga();
+$sqlMangaDetail=new SqlMangaDetail();
+$mangaDetails=$sqlMangaDetail->selectLastSorti();
 
+$details=[];
+foreach($mangaDetails as $mangaDetail){
+    $trans=[];
+    $result=$sqlManga->selectTitreID($mangaDetail->getId_manga());
+    array_push($trans,$result,$mangaDetail);
+    array_push($details,$trans);
+}
 
 
 include('view/welcome.php');

@@ -20,6 +20,7 @@ if(isset($_POST['login'])&& !empty($_POST['login'])&& isset($_POST['mdp'])&& !em
 
     }else{
         /*mdp et user incorecte */
+        include('view/header.php');
         $_POST['error']=2;
         include('view/login.php');
     }

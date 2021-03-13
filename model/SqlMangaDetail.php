@@ -77,4 +77,14 @@ class SqlMangaDetail extends Sql{
 
     }
 
+
+
+    public function selectLastSorti(){
+    $sql="select mt.id,mt.numero_du_tome,mt.img,mt.id_manga from manga_tome as mt group by id desc limit 3";
+    $query=$this->pdo->query($sql);
+    $query->setFetchMode(PDO::FETCH_CLASS, $this->class);
+    $result= $query->fetchAll();
+    return $result;
+    }
+
 }

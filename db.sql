@@ -51,9 +51,11 @@ CREATE TABLE IF NOT EXISTS addresse(
     localite VARCHAR(255),
     pays VARCHAR(255),
     id_userdb INTEGER,
+    del BOOLEAN,
     FOREIGN KEY (id_userdb)
 	REFERENCES userDB(id) ON UPDATE CASCADE ON DELETE NO ACTION
 )ENGINE=INNODB;
+
 
 
 
@@ -233,10 +235,10 @@ INSERT INTO userdb(nom,prenom,email,date_inscription,id_role_user,mdp)VALUES
 	("maurice","maurice","maurice@maurice.bf",NOW(),2,"$2y$12$YRL/OOGOUliJiKgQTikypOiGiQBXp2DLDHLqoklDwekx8fMeb9Sz6"),
 	("admin","admin","admin@admin.admin",NOW(),1,"$2y$12$YRL/OOGOUliJiKgQTikypOiGiQBXp2DLDHLqoklDwekx8fMeb9Sz6");
 
-INSERT INTO addresse(rue,numero,numBoite,cp,localite,pays,id_userdb)VALUES
-	("rue de bray","212","","7110","maurage","belgique",1),
-	("avenue du test","1b","4","6000","charleroi","belgique",1),
-	("rue des maurice","154","","1230","maurice","belgique",2);
+INSERT INTO addresse(rue,numero,numBoite,cp,localite,pays,id_userdb,del)VALUES
+	("rue de bray","212","","7110","maurage","belgique",1,TRUE),
+	("avenue du test","1b","4","6000","charleroi","belgique",1,TRUE),
+	("rue des maurice","154","","1230","maurice","belgique",2,TRUE);
 
 INSERT INTO etat(nom) VALUES ('fini'),('en cours'),('stoppe');
 
@@ -371,7 +373,13 @@ and c.date_de_la_commande>='2021-02-30' and c.date_de_la_commande<='2021-03-30'
         SELECT i.id,i.titre,i.dessinateur,i.scenariste,i.editeur_oeuvre_origine,c.categorie
             FROM manga AS i,categorie AS c
             WHERE i.id_categorie=c.id and i.id = 2
-        
+
+	
+        INSERT INTO addresse(rue,numero,numBoite,cp,localite,pays,id_userdb)
+        VALUES("rue de bray","212","b","7110","belgique","111",1);
+        select * from addresse
+
+	select * from userdb
         
         */
 

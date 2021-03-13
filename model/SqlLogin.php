@@ -33,7 +33,14 @@ class SqlLogin extends Sql{
             values(:nom,:prenom,:mdp,:email,:date_inscription,:id_role_user)";
         $query=$this->pdo->prepare($sql);
         $query->execute(array('nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp,'email'=>$email,'date_inscription'=>$date_inscription,'id_role_user'=>$id_role_user));
-
-        
     }
+
+    public function sqlUpdateMdp($newMdp,$id){
+        $sql="UPDATE userdb
+        SET mdp=:newMdp
+        WHERE id=:id";
+        $query=$this->pdo->prepare($sql);
+        $query->execute(array('newMdp'=>$newMdp,'id'=>$id));
+    }
+
 }

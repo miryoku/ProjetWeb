@@ -57,8 +57,9 @@ if(file_exists($file)){ // On vérifie que le fichier php existe
 
 }
 else {
+    include('view/header.php');
     require 'view/404.php';
-
+    include('view/footer.php');
 }
 
 

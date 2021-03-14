@@ -4,7 +4,7 @@ require_once('model/SqlCommande.php');
 require_once('model/commandeDetail.php'); 
 require_once('model/SqlCommandeDetail.php');
 require_once('model/SqlSell.php');
-
+require_once('model/SqlNotObject.php');
 if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){ 
     if(REQ_ACTION){
         $sqlCommande=new SqlCommande();
@@ -38,7 +38,9 @@ if(!empty($_SESSION['user']) &&$_SESSION['user']->getName_role()=="admin"){
         $SqlMangaDetail=new SqlMangaDetail();
         $SqlManga=new SqlManga();
         $sqlCommande=new SqlCommande();
+        $sqlNotObject=new SqlnotObject();
         $commande=$sqlCommande->afficheIdCommande(REQ_TYPE_ID);
+        $user=$sqlNotObject->sqlSelectUser($commande[0]->getId_user());
         $details=$SqlCommandeDetail->afficheCommandeDetailUser(REQ_TYPE_ID);
         $arrays=[];
         if(empty($details)){

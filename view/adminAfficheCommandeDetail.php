@@ -1,4 +1,19 @@
 
+<div class="card text-center">
+  <div class="card-header">
+    Information
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+        </br> Nom : <?=$user[0][0]?> 
+        </br> Prenom : <?=$user[0][0]?> <?=$user[0][1]?>
+        </br>Email : <?=$user[0][2]?>
+        </br>etat de la commande :<?=$commande[0]->getStatus()?>
+        </br>Montant de la commande : <?=$commande[0]->getPrice()?>
+        </br>Date de la commande : <?=$commande[0]->getDate()?>
+    </p>
+  </div>
+</div>
 <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8">

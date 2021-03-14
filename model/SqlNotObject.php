@@ -73,4 +73,14 @@ class SqlnotObject extends Sql{
     
     }
 
+
+    public function sqlSelectUser($id){
+        $sql="select nom,prenom,email from userDb where id=:id";
+
+        $query=$this->pdo->prepare($sql);
+        $query->execute(array('id'=>$id));
+        $result=$query->fetchall();
+        return $result;
+    }
+
 }
